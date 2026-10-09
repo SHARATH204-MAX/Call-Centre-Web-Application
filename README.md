@@ -36,12 +36,7 @@ Everything is implemented with **100% local sample data and state** (no external
 ---
 
 ## 🎥 2-Minute Full Application Demo Video
-
-> **Watch the full application walkthrough showcasing all 5 pages & interactive workflows:**  
-> ▶️ **[Click Here to Open / Play Demo Video (MP4)](./public/Screen%20Recording%202026-10-09%20234144.mp4)**  
-> 
-> *Alternatively, if you upload the video to Loom, Google Drive, or YouTube, you can also link it below:*  
-> [![Watch Full Demo Walkthrough](https://img.shields.io/badge/▶_Watch_Full_Demo_Video-Loom_%2F_Drive_%2F_YouTube-red?style=for-the-badge&logo=youtube)](./public/Screen%20Recording%202026-10-09%20234144.mp4)
+  
 
 ### 🎬 Live Demo Video Player
 Below is the recorded walkthrough video (`public/Screen Recording 2026-10-09 234144.mp4`) showing all screens, active call dialer simulation, streaming speech-to-text, and real-time SOP auto-ticking:
