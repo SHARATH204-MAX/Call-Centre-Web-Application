@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { calls as initialCalls } from "../../data/calls";
-import type { CallRecord } from "../../types";
+import { useApp } from "../../context/AppContext";
+import type { CallRecord, Lead } from "../../types";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { formatFriendlyDate } from "../../utils/dateUtils";
 import Button from "../ui/Button";
@@ -9,38 +9,54 @@ import Modal from "../ui/Modal";
 import { PhoneIncoming, PhoneCall, CheckCircle2, AlertTriangle, ShieldAlert, Sparkles } from "lucide-react";
 
 export default function IncomingCalls() {
-  const [callsList, setCallsList] = useState<CallRecord[]>(() =>
-    initialCalls.filter((c) => c.type === "missed" || c.status === "Missed" || c.status === "Pending Callback")
+  const { calls, setCalls, leads, startCallForLead } = useApp();
+  const [activeCallbackModal, setActiveCallbackModal] = useState<CallRecord | null>(null);
+
+  const missedCallsList = calls.filter(
+    (c) => c.type === "missed" || c.status === "Missed" || c.status === "Pending Callback" || c.status === "Callback Placed"
   );
 
-  const [activeCallbackModal, setActiveCallbackModal] = useState<CallRecord | null>(null);
-  const [callbackSuccessMsg, setCallbackSuccessMsg] = useState<string | null>(null);
-
   const handleInitiateCallback = (call: CallRecord) => {
+    // Open asking dialog box first
     setActiveCallbackModal(call);
   };
 
-  const handleConfirmCallback = () => {
+  const handleConfirmAndCall = () => {
     if (!activeCallbackModal) return;
 
-    // Update local state to mark callback initiated
-    setCallsList((prev) =>
+    const targetCall = activeCallbackModal;
+
+    // Update call status to Callback Placed
+    setCalls((prev) =>
       prev.map((c) =>
-        c.id === activeCallbackModal.id
+        c.id === targetCall.id
           ? { ...c, status: "Callback Placed", sopStep: "Callback Completed · SOP Active" }
           : c
       )
     );
 
-    setCallbackSuccessMsg(`Simulated callback placed to ${activeCallbackModal.leadName} (${activeCallbackModal.phone})`);
+    // Find matching lead or fallback
+    const matchedLead: Lead = leads.find((l) => l.name.toLowerCase().includes(targetCall.leadName.toLowerCase())) ?? {
+      id: targetCall.leadId ?? `L_${Date.now()}`,
+      name: targetCall.leadName,
+      phone: targetCall.phone,
+      product: targetCall.product,
+      score: 88,
+      intentScore: 85,
+      estimatedValue: targetCall.estimatedValue,
+      status: "OPEN",
+      buyingSignals: ["Inquired about missed call", "Requested immediate callback"],
+      nextAction: "Immediate callback walkthrough"
+    };
+
+    // Close asking dialog box
     setActiveCallbackModal(null);
 
-    setTimeout(() => {
-      setCallbackSuccessMsg(null);
-    }, 5000);
+    // Start live call in Plan workspace
+    startCallForLead(matchedLead);
   };
 
-  const totalValueAtStake = callsList
+  const totalValueAtStake = missedCallsList
     .filter((c) => c.status !== "Callback Placed")
     .reduce((acc, curr) => acc + curr.estimatedValue, 0);
 
@@ -66,26 +82,15 @@ export default function IncomingCalls() {
         </div>
       </div>
 
-      {/* Success Notification Alert */}
-      {callbackSuccessMsg && (
-        <div className="rounded-xl bg-emerald-100 border border-emerald-300 p-3.5 text-xs font-bold text-emerald-900 flex items-center justify-between animate-in fade-in">
-          <div className="flex items-center gap-2">
-            <CheckCircle2 size={18} className="text-emerald-700" />
-            <span>{callbackSuccessMsg}</span>
-          </div>
-          <span className="text-[10px] bg-emerald-200 px-2 py-0.5 rounded-full text-emerald-800">Local State Updated</span>
-        </div>
-      )}
-
       {/* Calls List */}
-      {callsList.length === 0 ? (
+      {missedCallsList.length === 0 ? (
         <EmptyState
           title="No pending missed calls"
           description="All incoming missed calls have been addressed by the call centre team."
         />
       ) : (
         <div className="space-y-2.5">
-          {callsList.map((call) => {
+          {missedCallsList.map((call) => {
             const isPlaced = call.status === "Callback Placed";
 
             return (
@@ -158,20 +163,20 @@ export default function IncomingCalls() {
         </div>
       )}
 
-      {/* Callback Simulation Confirmation Modal */}
+      {/* Asking Dialog Box Modal */}
       {activeCallbackModal && (
         <Modal
           isOpen={!!activeCallbackModal}
           onClose={() => setActiveCallbackModal(null)}
-          title={`Call back ${activeCallbackModal.leadName}`}
-          subtitle={`Simulated telephony dialogue · Target product: ${activeCallbackModal.product}`}
+          title={`Call back ${activeCallbackModal.leadName}?`}
+          subtitle={`Confirm initiating call · Product: ${activeCallbackModal.product}`}
           headerBg="bg-[#123c30]"
         >
           <div className="space-y-4 text-xs text-gray-800">
-            <div className="rounded-xl bg-emerald-50 p-3 border border-emerald-200">
-              <p className="font-bold text-emerald-900">Walk-out Recovery Tele-caller Script:</p>
-              <p className="mt-1 italic text-emerald-950">
-                "Hello {activeCallbackModal.leadName}! This is Ananya from On-Ground Call Centre calling regarding your inquiry for the {activeCallbackModal.product}. I saw we missed your call..."
+            <div className="rounded-xl bg-emerald-50 p-3.5 border border-emerald-200 space-y-1">
+              <p className="font-bold text-emerald-950">Walk-out Recovery Tele-caller SOP Script:</p>
+              <p className="italic text-emerald-900 leading-relaxed">
+                "Hello {activeCallbackModal.leadName}! This is Arvind calling from The Sleep Company Koramangala store regarding your inquiry for the {activeCallbackModal.product}..."
               </p>
             </div>
 
@@ -190,8 +195,8 @@ export default function IncomingCalls() {
               <Button variant="outline" size="sm" onClick={() => setActiveCallbackModal(null)}>
                 Cancel
               </Button>
-              <Button variant="primary" size="sm" onClick={handleConfirmCallback}>
-                Confirm Callback Placed
+              <Button variant="primary" size="sm" onClick={handleConfirmAndCall} className="bg-[#1d9e75] hover:bg-[#168260] font-bold">
+                <PhoneCall size={14} /> Start Call Now
               </Button>
             </div>
           </div>
