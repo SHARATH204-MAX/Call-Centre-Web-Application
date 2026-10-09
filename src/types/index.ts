@@ -1,4 +1,4 @@
-export type Page = "dashboard" | "calls" | "calendar" | "pulse";
+export type Page = "dashboard" | "calls" | "calendar" | "pulse" | "practise";
 
 export type PlanTab = "outgoing" | "incoming" | "recent";
 
@@ -7,11 +7,17 @@ export interface Lead {
   name: string;
   phone: string;
   product: string;
-  score: number; // ICP score e.g. 92
-  intentScore: number; // Intent score e.g. 87
-  estimatedValue: number; // e.g. 55000
-  status: string; // e.g. "Follow-up due", "Interested", "New lead"
+  score: number; // ICP score e.g. 87%
+  intentScore: number; // Intent score e.g. 91
+  estimatedValue: number; // e.g. 5400
+  status: string; // e.g. "OPEN", "Follow-up due", "Interested", "New lead"
+  slaTime?: string; // e.g. "2h left"
+  quoteStatus?: string; // e.g. "Quote to be given to customer"
   buyingSignals: string[];
+  signalCategories?: {
+    category: string;
+    description: string;
+  }[];
   nextAction: string;
   lastContacted?: string;
   notes?: string;
@@ -39,8 +45,8 @@ export interface CallRecord {
 export interface CalendarEvent {
   id: string;
   date: string; // YYYY-MM-DD
-  title: string;
   time?: string;
+  title: string;
   type: "follow-up" | "callback" | "review" | "meeting";
   leadName?: string;
   leadId?: string;
@@ -65,6 +71,7 @@ export interface Channel {
   unreadCount?: number;
   isDM?: boolean;
   category?: "agent" | "channel" | "direct";
+  percentage?: number;
 }
 
 export interface DashboardStat {
@@ -73,12 +80,19 @@ export interface DashboardStat {
   change: string;
   isPositive?: boolean;
   icon?: string;
+  subtitle?: string;
 }
 
 export interface WeeklyEarning {
   day: string;
   amount: number;
   target?: number;
+}
+
+export interface CsatTrendData {
+  day: string;
+  csat: number;
+  callsHandled: number;
 }
 
 export interface ProgressCardData {
@@ -92,6 +106,7 @@ export interface ProgressCardData {
 export interface PinnedCardInfo {
   id: string;
   title: string;
+  subtitle?: string;
   description: string;
   options: { label: string; actionKey: string }[];
   resolved?: boolean;

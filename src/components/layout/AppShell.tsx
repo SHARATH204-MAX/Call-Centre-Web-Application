@@ -29,6 +29,10 @@ export default function AppShell({
       title: "Plan",
       subtitle: "Call management, lead scoring & call log review",
     },
+    practise: {
+      title: "Practise a Call",
+      subtitle: "AI Pitch Coach call simulation & objection handling workspace",
+    },
     calendar: {
       title: "Calendar",
       subtitle: "Scheduled customer callbacks, reviews & store syncs",

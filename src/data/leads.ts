@@ -3,157 +3,206 @@ import type { Lead } from "../types";
 export const leads: Lead[] = [
   {
     id: "L001",
-    name: "Akash Mehta",
+    name: "MK Mukunda",
     phone: "+91 98765 43210",
-    product: "Smart Ortho Mattress (King Size)",
-    score: 94,
-    intentScore: 89,
-    estimatedValue: 65000,
-    status: "Follow-up due",
+    product: "Ortho GRID Mattress",
+    score: 87,
+    intentScore: 91,
+    estimatedValue: 5400,
+    status: "OPEN",
+    slaTime: "2h left",
+    quoteStatus: "Quote to be given to customer",
     buyingSignals: [
-      "Asked about 100-night trial period & warranty details",
-      "Compared Ortho Luxury vs Smart Ortho side-by-side",
-      "Specifically requested callback during evening (6-8 PM)",
-      "Inquired about 0% EMI options via HDFC Credit Card"
+      "Asked specifically about EMI options on the Ortho GRID — budget is a live concern, not a blocker",
+      "Compared pricing with a competitor before reaching out — price-anchored, expects a competitive number",
+      "Hasn't raised warranty yet — worth proactively mentioning the 10-year trial period to reduce perceived risk"
     ],
-    nextAction: "Call back to finalize Ortho King order & confirm delivery date",
-    lastContacted: "Yesterday, 4:30 PM",
-    notes: "Customer was very enthusiastic about spine alignment support. Mentioned backache relief.",
+    signalCategories: [
+      {
+        category: "Financing Related",
+        description: "Asked specifically about EMI options on the Ortho GRID — budget is a live concern, not a blocker"
+      },
+      {
+        category: "Quotation Demanded",
+        description: "Compared pricing with a competitor before reaching out — price-anchored, expects a competitive number"
+      },
+      {
+        category: "Warranty Related",
+        description: "Hasn't raised warranty yet — worth proactively mentioning the 10-year trial period to reduce perceived risk"
+      },
+      {
+        category: "CUMULATIVE MISSED",
+        description: "Expired without close, visible to manager"
+      }
+    ],
+    nextAction: "Provide competitor price match quotation & offer 0% HDFC EMI walkthrough",
+    lastContacted: "Today, 10:45 AM",
+    notes: "High-intent shopper for The Sleep Company. Interested in Ortho GRID 100-night trial.",
     location: "Koramangala, Bengaluru",
-    store: "The Sleep Company - Indiranagar Experience Centre",
-    preferredTime: "6:00 PM - 8:00 PM"
+    store: "The Sleep Company - Koramangala Experience Centre",
+    preferredTime: "4:30 PM - 6:00 PM"
   },
   {
     id: "L002",
-    name: "Meera Sharma",
+    name: "Rita S.",
     phone: "+91 98112 34567",
-    product: "Ergonomic Smart Chair Pro",
-    score: 88,
-    intentScore: 82,
-    estimatedValue: 32000,
+    product: "Smart Luxe Mattress (King)",
+    score: 95,
+    intentScore: 90,
+    estimatedValue: 23000,
     status: "Interested",
+    slaTime: "4h left",
+    quoteStatus: "Trial brochure sent",
     buyingSignals: [
-      "Visited product demo page 4 times in 2 days",
-      "Asked about lumbar support adjustability & armrest angles",
-      "Requested official product brochure via WhatsApp"
+      "Tested Smart Luxe at Koramangala store yesterday",
+      "Asked about 100-night risk-free home trial",
+      "Requested instant delivery to HSR Layout"
     ],
-    nextAction: "Share product spec brochure & dispatch store trial invite",
-    lastContacted: "Today, 11:15 AM",
-    notes: "Works from home, looking for high-back ergonomic mesh chair. Needs quick delivery.",
+    signalCategories: [
+      {
+        category: "Store Visit Confirmed",
+        description: "Tested Smart Luxe at Koramangala store yesterday"
+      },
+      {
+        category: "Delivery Urgency",
+        description: "Requested instant delivery to HSR Layout"
+      }
+    ],
+    nextAction: "Confirm delivery slot & offer complimentary gel pillow set",
+    lastContacted: "Today, 11:30 AM",
+    notes: "Very close to closing. Needs final approval on delivery timeline.",
     location: "HSR Layout, Bengaluru",
-    store: "Furnishka - HSR Store"
+    store: "The Sleep Company - Koramangala"
   },
   {
     id: "L003",
-    name: "Rahul Verma",
+    name: "Priya Iyer",
     phone: "+91 99001 88223",
-    product: "Elevate Adjustable Recliner Bed",
-    score: 82,
-    intentScore: 76,
-    estimatedValue: 88000,
-    status: "New lead",
+    product: "Ergonomic Smart Chair Pro",
+    score: 84,
+    intentScore: 82,
+    estimatedValue: 45000,
+    status: "Walk-out 4h ago",
+    slaTime: "1h left",
+    quoteStatus: "Re-engaged before",
     buyingSignals: [
-      "Filled lead form on Instagram ad campaign",
-      "Checked zero-downpayment financing schemes",
-      "Opened WhatsApp catalog link"
+      "Walked out of store 4h ago after testing lumbar support",
+      "Requested callback regarding billing dispute / discount match",
+      "Checked competitor price online"
     ],
-    nextAction: "Schedule initial intro call & assess bed size requirement",
-    lastContacted: "Today, 9:00 AM",
-    notes: "Interested in motorized reclining bed for senior parents.",
-    location: "Whitefield, Bengaluru",
-    store: "The Sleep Company - Whitefield"
+    signalCategories: [
+      {
+        category: "Walk-out Recovery SOP 1",
+        description: "Walked out of store 4h ago after testing lumbar support"
+      }
+    ],
+    nextAction: "Call to offer ₹2,500 walk-out spot discount code",
+    lastContacted: "Today, 12:15 PM",
+    notes: "Walk-out lead from Indiranagar store. Re-engage before 5:00 PM.",
+    location: "Indiranagar, Bengaluru",
+    store: "The Sleep Company - Indiranagar"
   },
   {
     id: "L004",
-    name: "Priya Nair",
+    name: "Faizan A.",
     phone: "+91 97400 11223",
-    product: "Hybrid Latex Mattress (Queen Size)",
-    score: 79,
-    intentScore: 71,
-    estimatedValue: 48000,
-    status: "Callback requested",
+    product: "Hybrid Latex Mattress (Queen)",
+    score: 81,
+    intentScore: 78,
+    estimatedValue: 14000,
+    status: "Missed Yesterday",
+    slaTime: "Immediate",
+    quoteStatus: "Visited store / in CRM",
     buyingSignals: [
-      "Asked if latex is 100% natural organic",
-      "Inquired about old mattress trade-in exchange bonus"
+      "Visited store yesterday at 10:55 AM",
+      "Inquired about natural organic latex certification"
     ],
-    nextAction: "Call to offer ₹3,000 exchange bonus discount",
-    lastContacted: "Oct 8, 2:15 PM",
-    notes: "Has existing spring mattress, wants eco-friendly natural latex option.",
+    nextAction: "Immediate callback for missed inbound call",
+    lastContacted: "Yesterday, 10:55 AM",
+    notes: "High value lead in CRM.",
     location: "Jayanagar, Bengaluru",
-    store: "Duroflex - Jayanagar"
+    store: "Furnishka - Jayanagar"
   },
   {
     id: "L005",
-    name: "Siddharth Rao",
+    name: "Kavitha R.",
     phone: "+91 96118 77665",
-    product: "Executive Solid Teak Desk & Chair Combo",
-    score: 75,
-    intentScore: 68,
-    estimatedValue: 52000,
-    status: "Follow-up due",
+    product: "Executive Teak Desk Combo",
+    score: 78,
+    intentScore: 74,
+    estimatedValue: 9800,
+    status: "Warm lead",
+    slaTime: "Today",
+    quoteStatus: "Swatches requested",
     buyingSignals: [
-      "Asked about wood finish custom polish (Walnut vs Teak)",
-      "Checked physical store stock availability"
+      "Inquired about custom walnut vs teak finish",
+      "Missed call yesterday at 4:40 PM"
     ],
     nextAction: "Send teak wood sample photos via WhatsApp",
-    lastContacted: "Oct 7, 5:45 PM",
-    notes: "Setting up new home office, demands solid wood finish.",
+    lastContacted: "Yesterday, 4:40 PM",
+    notes: "Setting up home office in JP Nagar.",
     location: "JP Nagar, Bengaluru",
     store: "Furnishka - Bannerghatta"
   },
   {
     id: "L006",
-    name: "Ananya Gupta",
+    name: "Ritu S.",
     phone: "+91 98300 44556",
-    product: "Cooling Gel Memory Foam Pillows (Set of 2)",
-    score: 68,
-    intentScore: 60,
-    estimatedValue: 12000,
-    status: "New lead",
+    product: "Cooling Memory Foam Pillows",
+    score: 72,
+    intentScore: 68,
+    estimatedValue: 5500,
+    status: "Visited store / in CRM",
+    slaTime: "Today",
+    quoteStatus: "Visited store today 11:20 AM",
     buyingSignals: [
-      "Click-through from email newsletter promo code"
+      "Tested neck support pillows at store",
+      "Asked about bundle discount for set of 4"
     ],
-    nextAction: "Send 15% limited time coupon discount code",
-    lastContacted: "Oct 8, 10:00 AM",
-    notes: "Looking for neck pain support pillows.",
+    nextAction: "Send 15% limited time promo discount coupon",
+    lastContacted: "Today, 11:20 AM",
+    notes: "Visited store today at 11:20 AM.",
     location: "Bellandur, Bengaluru",
-    store: "The Sleep Company - Online"
+    store: "The Sleep Company - Indiranagar"
   },
   {
     id: "L007",
-    name: "Vikramaditya Joshi",
+    name: "Suresh Nair",
     phone: "+91 99887 66554",
-    product: "Motorized Recliner Sofa 3-Seater",
-    score: 91,
-    intentScore: 85,
-    estimatedValue: 115000,
-    status: "Follow-up due",
+    product: "Motorized Recliner Bed",
+    score: 89,
+    intentScore: 86,
+    estimatedValue: 32000,
+    status: "Plan upgrade enquiry",
+    slaTime: "3h left",
+    quoteStatus: "Upgrade quote pending",
     buyingSignals: [
-      "Visited showroom on Sunday & tested leather recliner",
-      "Requested custom fabric swatch sample delivery home",
-      "Asked for architect/designer discount quote"
+      "Enquired about upgrading from manual recliner to motorized bed",
+      "Asked for exchange value for 2-year old recliner"
     ],
-    nextAction: "Confirm leather swatch dispatch & offer free home delivery",
-    lastContacted: "Oct 8, 6:30 PM",
-    notes: "High-net-worth customer furnishing new villa in Sarjapur Road.",
-    location: "Sarjapur Road, Bengaluru",
-    store: "Furnishka - Domlur"
+    nextAction: "Share motorized bed demo video & exchange valuation quote",
+    lastContacted: "Today, 1:45 PM",
+    notes: "Looking to upgrade existing bed.",
+    location: "Whitefield, Bengaluru",
+    store: "The Sleep Company - Whitefield"
   },
   {
     id: "L008",
-    name: "Kavita Reddy",
+    name: "Divya R.",
     phone: "+91 97110 22334",
-    product: "Ergonomic Kids Study Table Set",
-    score: 72,
-    intentScore: 65,
-    estimatedValue: 24000,
-    status: "Interested",
+    product: "Ergonomic Study Table",
+    score: 65,
+    intentScore: 60,
+    estimatedValue: 2400,
+    status: "Cold lead",
+    slaTime: "Tomorrow",
+    quoteStatus: "Cold lead follow-up",
     buyingSignals: [
-      "Asked about height adjustment mechanism for growing children"
+      "Missed call yesterday at 2:35 PM"
     ],
-    nextAction: "Share height adjustment video demonstration",
-    lastContacted: "Oct 7, 1:20 PM",
-    notes: "Buying for 8-year-old child.",
+    nextAction: "Schedule follow-up call",
+    lastContacted: "Yesterday, 2:35 PM",
+    notes: "Cold lead.",
     location: "Hebbal, Bengaluru",
     store: "Furnishka - Sahakarnagar"
   }

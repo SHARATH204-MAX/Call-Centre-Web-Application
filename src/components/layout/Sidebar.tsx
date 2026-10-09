@@ -1,4 +1,4 @@
-import { LayoutDashboard, Phone, CalendarDays, MessageSquare, ChevronDown, Sparkles } from "lucide-react";
+import { LayoutDashboard, Phone, CalendarDays, MessageSquare, ChevronDown, Sparkles, Mic } from "lucide-react";
 import type { Page, PlanTab } from "../../types";
 
 interface SidebarProps {
@@ -36,12 +36,12 @@ export default function Sidebar({
         {/* Brand Header */}
         <div className="flex items-center justify-between px-3 pb-6 border-b border-emerald-900/40 mb-3">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 shadow-inner">
-              <Sparkles size={18} />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 shadow-inner font-black text-xs">
+              OG
             </div>
             <div>
               <span className="block text-sm font-extrabold tracking-tight text-white">On-Ground.ai</span>
-              <span className="block text-[10px] text-emerald-300/70 font-medium">Call Centre Hub · Retail</span>
+              <span className="block text-[10px] text-emerald-300/70 font-medium">The Sleep Company · Call Centre</span>
             </div>
           </div>
         </div>
@@ -92,8 +92,8 @@ export default function Sidebar({
                 {(
                   [
                     ["outgoing", "Calls to make", "8 leads"],
-                    ["incoming", "Incoming", "2 missed"],
-                    ["recent", "Recent", "History"],
+                    ["incoming", "Incoming", "5 missed"],
+                    ["recent", "Recent", "8 calls"],
                   ] as const
                 ).map(([tab, label, badge]) => (
                   <button
@@ -115,6 +115,22 @@ export default function Sidebar({
               </div>
             )}
           </div>
+
+          {/* Practise a call (Bonus item from PDF sidebar) */}
+          <button
+            onClick={() => {
+              onNavigate("practise");
+              if (onCloseMobile) onCloseMobile();
+            }}
+            className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
+              page === "practise"
+                ? "bg-white/15 text-white shadow-xs font-semibold border-l-2 border-emerald-400"
+                : "text-[#a9c4ba] hover:bg-white/5 hover:text-white"
+            }`}
+          >
+            <Mic size={18} className={page === "practise" ? "text-emerald-300" : ""} />
+            <span>Practise a call</span>
+          </button>
 
           {/* Calendar */}
           <button
@@ -154,15 +170,15 @@ export default function Sidebar({
           </button>
         </nav>
 
-        {/* Agent Profile Footer */}
+        {/* Agent Profile Footer (Arvind Rajan) */}
         <div className="mt-auto border-t border-emerald-900/40 pt-4 px-1">
           <div className="flex items-center gap-3 rounded-xl bg-white/5 p-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500/30 text-xs font-bold text-emerald-200 border border-emerald-400/40">
               AR
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-white truncate">Ananya Rao</p>
-              <p className="text-[10px] text-emerald-300/70 truncate">Tele-caller · Shift Active</p>
+              <p className="text-xs font-semibold text-white truncate">Arvind Rajan</p>
+              <p className="text-[10px] text-emerald-300/70 truncate">The Sleep Company · Shift Active</p>
             </div>
           </div>
         </div>

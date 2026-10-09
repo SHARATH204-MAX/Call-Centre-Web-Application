@@ -8,6 +8,7 @@ import RecentCalls from "./components/calls/RecentCalls";
 import CalendarView from "./components/calendar/CalendarView";
 import PulseHome from "./components/pulse/PulseHome";
 import PulseChannel from "./components/pulse/PulseChannel";
+import PractiseCall from "./pages/PractiseCall";
 
 export default function App() {
   const [page, setPage] = useState<Page>("dashboard");
@@ -63,6 +64,9 @@ export default function App() {
           {planTab === "recent" && <RecentCalls />}
         </div>
       )}
+
+      {/* Bonus. Practise a Call */}
+      {page === "practise" && <PractiseCall />}
 
       {/* 5. Calendar View */}
       {page === "calendar" && <CalendarView />}
