@@ -26,7 +26,7 @@ import BeforeYouCallSOPModal from "./components/overlays/BeforeYouCallSOPModal";
 import LeadsModal from "./components/leads/LeadsModal";
 
 function MainContent() {
-  const { page, activeModal, closeModal, leads, selectedLeadIndex } = useApp();
+  const { page, activeModal, closeModal, leads, selectedLeadIndex, startCallForLead } = useApp();
 
   return (
     <AppShell>
@@ -68,6 +68,10 @@ function MainContent() {
           leads={leads}
           initialIndex={selectedLeadIndex}
           onClose={closeModal}
+          onInitiateCall={(lead) => {
+            closeModal();
+            startCallForLead(lead);
+          }}
         />
       )}
     </AppShell>

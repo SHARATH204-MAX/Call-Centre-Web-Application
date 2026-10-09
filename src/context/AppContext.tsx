@@ -149,6 +149,16 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       `[00:03] ${lead.name}: Hi Arvind! Yes, I was looking into the ${lead.product}.`
     ]);
     setPage("plan");
+
+    // Scroll back to call section smoothly
+    setTimeout(() => {
+      const callElem = document.getElementById("active-call-workspace") || document.getElementById("call-section");
+      if (callElem) {
+        callElem.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }, 100);
   };
 
   const endActiveCall = () => {

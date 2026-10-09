@@ -45,7 +45,7 @@ export default function ActiveCallWorkspace() {
   };
 
   return (
-    <div className="rounded-2xl border border-gray-200 bg-white shadow-xl overflow-hidden space-y-4 p-5 animate-in fade-in duration-300">
+    <div id="active-call-workspace" className="rounded-2xl border border-gray-200 bg-white shadow-xl overflow-hidden space-y-4 p-5 animate-in fade-in duration-300">
       {/* Caller Status Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-gray-100 pb-4">
         <div className="flex items-center gap-3">

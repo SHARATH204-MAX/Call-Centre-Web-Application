@@ -22,7 +22,7 @@ export default function PlanPage() {
   };
 
   return (
-    <div className="space-y-5 animate-in fade-in duration-300">
+    <div id="call-section" className="space-y-5 animate-in fade-in duration-300">
       {/* 4. Plan Heading Header — Dark Navy/Purple Treatment */}
       <div className="rounded-2xl bg-gradient-to-r from-[#1a1a2e] via-[#3b1254] to-[#123c30] p-5 text-white shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
