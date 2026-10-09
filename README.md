@@ -37,14 +37,18 @@ Everything is implemented with **100% local sample data and state** (no external
 
 ## 🎥 2-Minute Full Application Demo Video
 
-> **Watch the full 2-minute application walkthrough showcasing all 5 pages & interactive workflows:**  
-> [![Watch Full Demo Walkthrough](https://img.shields.io/badge/▶_Watch_Full_2--Min_Demo_Video-Loom_%2F_Drive_%2F_YouTube-red?style=for-the-badge&logo=youtube)](YOUR_DEMO_VIDEO_LINK_HERE)  
-> *(Note: You can replace `YOUR_DEMO_VIDEO_LINK_HERE` with your recorded Loom, Google Drive, or YouTube link!)*
+> **Watch the full application walkthrough showcasing all 5 pages & interactive workflows:**  
+> ▶️ **[Click Here to Open / Play Demo Video (MP4)](./public/Screen%20Recording%202026-10-09%20234144.mp4)**  
+> 
+> *Alternatively, if you upload the video to Loom, Google Drive, or YouTube, you can also link it below:*  
+> [![Watch Full Demo Walkthrough](https://img.shields.io/badge/▶_Watch_Full_Demo_Video-Loom_%2F_Drive_%2F_YouTube-red?style=for-the-badge&logo=youtube)](./public/Screen%20Recording%202026-10-09%20234144.mp4)
 
-### 🎬 Live Demo Recording
-Below is the live recorded demo walkthrough showing all screens, active call dialer simulation, streaming speech-to-text, and real-time SOP auto-ticking:
+### 🎬 Live Demo Video Player
+Below is the recorded walkthrough video (`public/Screen Recording 2026-10-09 234144.mp4`) showing all screens, active call dialer simulation, streaming speech-to-text, and real-time SOP auto-ticking:
 
-![On-Ground.ai Call Centre App Walkthrough Demo](./public/demo_walkthrough.webp)
+<video src="./public/Screen%20Recording%202026-10-09%20234144.mp4" controls="controls" width="100%" style="border-radius: 12px; max-height: 520px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
+  <p>Your browser does not support embedded HTML5 video. <a href="./public/Screen%20Recording%202026-10-09%20234144.mp4">Click here to play or download the demo video file</a>.</p>
+</video>
 
 ---
 
