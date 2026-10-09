@@ -163,14 +163,22 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setCallTimer(0);
     setIsMuted(false);
     setIsOnHold(false);
+    const isRitu = lead.name.toLowerCase().includes("ritu") || lead.product.toLowerCase().includes("luxe");
+    const productName = isRitu ? "Smart Luxe Mattress" : lead.product;
+    const storeLocation = isRitu ? "RT Nagar store" : "Koramangala flagship store";
+    const leadPrice = isRitu ? "₹13,390" : `₹${lead.estimatedValue.toLocaleString("en-IN")}`;
+
     const fullScript = [
-      `[00:01] Tele-caller Arvind: Hello ${lead.name}! This is Arvind calling from The Sleep Company Koramangala flagship store...`,
-      `[00:04] ${lead.name}: Hi Arvind! Yes, I was checking out the ${lead.product} online and visited the store earlier today.`,
-      `[00:10] Tele-caller Arvind: Fantastic! I noticed you were looking at back-support mattresses. Were you specifically looking for firm lumbar support or pressure-relieving comfort?`,
-      `[00:18] ${lead.name}: Mostly looking for back-pain relief and cooling comfort, but I wanted to confirm the 100-night trial period and EMI options before deciding.`,
-      `[00:26] Tele-caller Arvind: Excellent question! We offer a 100-night risk-free home trial with zero-cost EMI starting from ₹450/month, plus free door-step delivery & installation!`,
-      `[00:34] ${lead.name}: That sounds very reasonable. Can you send me the detailed quotation and store direction link on WhatsApp so I can review with my family?`,
-      `[00:41] Tele-caller Arvind: Absolutely! I am dispatching the official quote, EMI breakdown, and digital catalog directly to your WhatsApp right now!`
+      `[00:01] Tele-caller Aditi: Hi ${lead.name}, this is Aditi — following up after your visit to our ${storeLocation} on the ${productName}.`,
+      `[00:04] ${lead.name}: Yes! I loved it, was just checking how soon it could be delivered.`,
+      `[00:10] Tele-caller Aditi: Delivery inside the city is usually 2-3 days — can I check your address is still the one on file from the visit?`,
+      `[00:16] ${lead.name}: Yes, same address. What about the total cost with delivery?`,
+      `[00:23] Tele-caller Aditi: For the ${productName} it comes to ${leadPrice} including free delivery and setup.`,
+      `[00:30] Tele-caller Aditi: Also, we have a 0% interest EMI plan starting at ₹1,115/month if you'd like to spread out the payment comfortably.`,
+      `[00:37] ${lead.name}: Oh, that's great! And how about the warranty and trial coverage?`,
+      `[00:43] Tele-caller Aditi: It comes with a 10-year comprehensive warranty and our 100-night risk-free sleep trial.`,
+      `[00:50] ${lead.name}: Perfect! Can you send me the payment link and details on WhatsApp so I can complete it right away?`,
+      `[00:57] Tele-caller Aditi: Absolutely! Dispatching the WhatsApp invoice and payment link now. We'll have your ${productName} delivered within 48 hours!`
     ];
     setFullScriptLines(fullScript);
     setTranscriptLines([fullScript[0]]); // Start with first line only, rest will stream one by one
