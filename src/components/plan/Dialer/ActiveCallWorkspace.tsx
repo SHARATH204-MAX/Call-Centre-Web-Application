@@ -29,6 +29,8 @@ import {
   Repeat
 } from "lucide-react";
 
+import { playCallEndSound, playSopTickSound } from "../../../utils/audioEffects";
+
 export default function ActiveCallWorkspace() {
   const {
     activeCallLead,
@@ -50,13 +52,16 @@ export default function ActiveCallWorkspace() {
   const [quickActionNotice, setQuickActionNotice] = useState<string | null>(null);
   const transcriptContainerRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll transcript container to bottom as new messages arrive
+  // Auto-scroll transcript container to bottom as new messages arrive & play soft SOP tick chime
   useEffect(() => {
     if (transcriptContainerRef.current) {
       transcriptContainerRef.current.scrollTo({
         top: transcriptContainerRef.current.scrollHeight,
         behavior: "smooth"
       });
+    }
+    if (transcriptLines.length > 1) {
+      playSopTickSound();
     }
   }, [transcriptLines.length]);
 
@@ -145,8 +150,16 @@ export default function ActiveCallWorkspace() {
           <div>
             <div className="flex items-center gap-2">
               <h2 className="text-base font-extrabold text-gray-900">{lead.name}</h2>
-              <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-extrabold text-emerald-900 flex items-center gap-1">
+              <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-[10px] font-extrabold text-emerald-900 flex items-center gap-1.5 shadow-2xs">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-600 animate-pulse" /> Live Call
+                {/* Speech Audio Waveform Visualizer */}
+                <span className="flex items-center gap-0.5 ml-1">
+                  <span className="h-2 w-0.5 bg-emerald-600 rounded-full animate-pulse" />
+                  <span className="h-3.5 w-0.5 bg-emerald-600 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                  <span className="h-2.5 w-0.5 bg-emerald-600 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                  <span className="h-4 w-0.5 bg-emerald-600 rounded-full animate-bounce [animation-delay:0s]" />
+                  <span className="h-2 w-0.5 bg-emerald-600 rounded-full animate-pulse" />
+                </span>
               </span>
             </div>
             <p className="text-xs text-gray-500 font-medium">{lead.phone} · {lead.product}</p>
@@ -197,7 +210,10 @@ export default function ActiveCallWorkspace() {
             <Button
               variant="danger"
               size="md"
-              onClick={endActiveCall}
+              onClick={() => {
+                playCallEndSound();
+                endActiveCall();
+              }}
               className="font-bold shadow-md bg-red-600 hover:bg-red-700"
             >
               <PhoneOff size={16} /> End Call

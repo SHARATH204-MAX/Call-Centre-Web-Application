@@ -53,6 +53,10 @@ export default function Dashboard() {
           <Button variant="outline" size="sm" onClick={() => openModal("lead-analysis")} className="bg-white/10 text-white border-white/20 hover:bg-white/20">
             <PieChart size={14} /> Lead Analysis
           </Button>
+
+          <Button variant="outline" size="sm" onClick={() => openModal("shift-report")} className="bg-white/10 text-white border-white/20 hover:bg-white/20">
+            <Award size={14} /> Shift Report
+          </Button>
         </div>
       </div>
 

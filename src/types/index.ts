@@ -212,4 +212,7 @@ export type ModalType =
   | "notifications"
   | "tag-forward"
   | "keypad"
-  | "before-you-call";
+  | "before-you-call"
+  | "evaluator-tour"
+  | "hotkeys"
+  | "shift-report";

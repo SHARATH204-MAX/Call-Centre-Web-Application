@@ -23,6 +23,9 @@ import NotificationModal from "./components/overlays/NotificationModal";
 import TagForwardModal from "./components/overlays/TagForwardModal";
 import KeypadModal from "./components/overlays/KeypadModal";
 import BeforeYouCallSOPModal from "./components/overlays/BeforeYouCallSOPModal";
+import EvaluatorTourModal from "./components/overlays/EvaluatorTourModal";
+import HotkeysModal from "./components/overlays/HotkeysModal";
+import ShiftReportModal from "./components/overlays/ShiftReportModal";
 import LeadsModal from "./components/leads/LeadsModal";
 
 function MainContent() {
@@ -62,6 +65,9 @@ function MainContent() {
       <TagForwardModal />
       <KeypadModal />
       <BeforeYouCallSOPModal />
+      <EvaluatorTourModal />
+      <HotkeysModal />
+      <ShiftReportModal />
 
       {activeModal === "leads" && (
         <LeadsModal

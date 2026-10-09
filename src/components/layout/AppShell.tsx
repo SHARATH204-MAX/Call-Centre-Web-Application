@@ -1,12 +1,71 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 import { useApp } from "../../context/AppContext";
 import type { Page } from "../../types";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
-  const { page } = useApp();
+  const {
+    page,
+    setPage,
+    callStatus,
+    setCallStatus,
+    isMuted,
+    setIsMuted,
+    isOnHold,
+    setIsOnHold,
+    endActiveCall,
+    activeModal,
+    openModal,
+    closeModal
+  } = useApp();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  // Global enterprise contact-center keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const activeTag = (document.activeElement?.tagName || "").toLowerCase();
+      const isInput = activeTag === "input" || activeTag === "textarea" || (document.activeElement as HTMLElement)?.isContentEditable;
+
+      if (e.key === "Escape") {
+        if (activeModal) {
+          e.preventDefault();
+          closeModal();
+        }
+        return;
+      }
+
+      if (isInput) return;
+
+      if (e.key === "?" || (e.shiftKey && e.key === "/")) {
+        e.preventDefault();
+        openModal("hotkeys");
+        return;
+      }
+
+      // Page Navigation: 1 - 5
+      if (e.key === "1") setPage("dashboard");
+      else if (e.key === "2") setPage("plan");
+      else if (e.key === "3") setPage("avani");
+      else if (e.key === "4") setPage("calendar");
+      else if (e.key === "5") setPage("pulse");
+
+      // Active Call Telephony controls
+      if (callStatus === "active" || callStatus === "on-hold") {
+        if (e.key.toLowerCase() === "m") {
+          setIsMuted(!isMuted);
+        } else if (e.key.toLowerCase() === "h") {
+          setIsOnHold(!isOnHold);
+          setCallStatus(isOnHold ? "active" : "on-hold");
+        } else if (e.key.toLowerCase() === "e") {
+          endActiveCall();
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [page, callStatus, isMuted, isOnHold, activeModal]);
 
   const pageTitles: Record<Page, { title: string; subtitle: string }> = {
     dashboard: {
