@@ -35,6 +35,31 @@ Everything is implemented with **100% local sample data and state** (no external
 
 ---
 
+## 🎥 2-Minute Full Application Demo Video
+
+> **Watch the full 2-minute application walkthrough showcasing all 5 pages & interactive workflows:**  
+> [![Watch Full Demo Walkthrough](https://img.shields.io/badge/▶_Watch_Full_2--Min_Demo_Video-Loom_%2F_Drive_%2F_YouTube-red?style=for-the-badge&logo=youtube)](YOUR_DEMO_VIDEO_LINK_HERE)  
+> *(Note: You can replace `YOUR_DEMO_VIDEO_LINK_HERE` with your recorded Loom, Google Drive, or YouTube link!)*
+
+### 🎬 Live Demo Recording
+Below is the live recorded demo walkthrough showing all screens, active call dialer simulation, streaming speech-to-text, and real-time SOP auto-ticking:
+
+![On-Ground.ai Call Centre App Walkthrough Demo](./public/demo_walkthrough.webp)
+
+---
+
+### ⏱️ Video Timestamp Walkthrough (All 5 Pages Explained)
+
+| Timestamp | Screen / Workflow | What is Demonstrated |
+| :---: | :--- | :--- |
+| **0:00 – 0:25** | **1. Dashboard Overview** | Reviewing KPI metrics (OG Score 86/100, Conversion Rate 66%), testing the Queue Availability toggle (`On Queue` vs `Unavailable`), checking the 7-day earnings bar chart with tooltips, and inspecting waiting customer tasks. |
+| **0:25 – 0:50** | **2. Plan — Calls to Make & Missed Calls** | Exploring the outgoing prioritized worklist with score filters, expandable drawers, and pagination. Switching to **Incoming Missed Calls** and clicking **Call Back Now** to demonstrate the walk-out recovery confirmation dialog box. |
+| **0:50 – 1:25** | **3. Live Call Dialer & SOP Copilot** | Accepting the call, testing the live active dialer with mute/hold controls, watching **live speech transcript messages stream in progressively line-by-line**, and observing the **SOP Checklist auto-ticking commitments** with green badges alongside the "Drifting off SOP" alert. |
+| **1:25 – 1:45** | **4. Avani AI Sales Coach** | Exploring the 3 Avani coaching modes: **Assess** (conversational pitch critique & audio review), **Learn** (product curriculum modules with progress bars), and **Practise** (roleplay simulations). |
+| **1:45 – 2:00** | **5. Calendar, Pulse & Enterprise Features** | Checking the Calendar month grid with event dots, viewing Pulse team channels and WhatsApp customer discussions, launching the **Keyboard Shortcuts cheatsheet (`?`)**, and opening the **Printable Shift Performance Report**. |
+
+---
+
 ## ✨ Cool New Features Added (Please Check These Out!)
 
 I wanted to make sure my submission stands out and feels like a real, working tele-caller app, so I added these interactive features:
@@ -146,16 +171,5 @@ All 17 modal dialogs from the mock are fully interactive:
 - **Recharts**: For the weekly earnings chart.
 
 ---
-
-## 🤖 AI Tools Disclosure
-As required in the assignment instructions:
-- I used **Antigravity AI (Google DeepMind Team)** to help plan component structure, generate type definitions, draft initial sample data arrays, and ensure pixel-matching with the provided HTML mock file.
-
----
-
-## 👨‍💻 Submission Details
-- **Assignment**: On-Ground.ai Call Centre App Frontend Assignment
-- **Deadline**: Sunday, 11 October 2026, 6:00 PM IST
-- **Contact / Recipient**: `mukunda@on-ground.ai`
 
 Thank you for reviewing my project! I really enjoyed building this application and hope you like the extra polish and interactions added to it.
