@@ -37,27 +37,11 @@ Everything is implemented with **100% local sample data and state** (no external
 
 ## 🎬 Application Demo
 
-Take a look at the Call Centre Web Application in action!
-
-![Call Centre Web Application Demo](./docs/demo.gif)
-
-> 💡 **Tip:** The preview above shows a quick looping walkthrough of the application. You can also play the full 2-minute walkthrough below or download the video directly from [`public/Screen Recording 2026-10-09 234144.mp4`](./public/Screen%20Recording%202026-10-09%20234144.mp4).
-
-<video src="./public/Screen%20Recording%202026-10-09%20234144.mp4" controls="controls" width="100%" style="border-radius: 12px; max-height: 520px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
-  <p>Your browser does not support embedded HTML5 video. <a href="./public/Screen%20Recording%202026-10-09%20234144.mp4">Click here to play or download the demo video file</a>.</p>
+<video src="./public/Screen%20Recording%202026-10-10%20002427.mp4" controls="controls" width="100%">
+  Your browser does not support the video tag.
 </video>
 
----
-
-### ⏱️ Video Timestamp Walkthrough (All 5 Pages Explained)
-
-| Timestamp | Screen / Workflow | What is Demonstrated |
-| :---: | :--- | :--- |
-| **0:00 – 0:25** | **1. Dashboard Overview** | Reviewing KPI metrics (OG Score 86/100, Conversion Rate 66%), testing the Queue Availability toggle (`On Queue` vs `Unavailable`), checking the 7-day earnings bar chart with tooltips, and inspecting waiting customer tasks. |
-| **0:25 – 0:50** | **2. Plan — Calls to Make & Missed Calls** | Exploring the outgoing prioritized worklist with score filters, expandable drawers, and pagination. Switching to **Incoming Missed Calls** and clicking **Call Back Now** to demonstrate the walk-out recovery confirmation dialog box. |
-| **0:50 – 1:25** | **3. Live Call Dialer & SOP Copilot** | Accepting the call, testing the live active dialer with mute/hold controls, watching **live speech transcript messages stream in progressively line-by-line**, and observing the **SOP Checklist auto-ticking commitments** with green badges alongside the "Drifting off SOP" alert. |
-| **1:25 – 1:45** | **4. Avani AI Sales Coach** | Exploring the 3 Avani coaching modes: **Assess** (conversational pitch critique & audio review), **Learn** (product curriculum modules with progress bars), and **Practise** (roleplay simulations). |
-| **1:45 – 2:00** | **5. Calendar, Pulse & Enterprise Features** | Checking the Calendar month grid with event dots, viewing Pulse team channels and WhatsApp customer discussions, launching the **Keyboard Shortcuts cheatsheet (`?`)**, and opening the **Printable Shift Performance Report**. |
+▶️ **Direct link to video:** [Screen Recording 2026-10-10 002427.mp4](./public/Screen%20Recording%202026-10-10%20002427.mp4)
 
 ---
 

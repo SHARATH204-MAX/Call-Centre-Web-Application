@@ -1,1 +1,1 @@
-public/Screen[[:space:]]Recording[[:space:]]2026-10-09[[:space:]]234144.mp4 filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
