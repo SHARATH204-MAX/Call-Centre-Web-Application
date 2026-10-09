@@ -119,63 +119,96 @@ export default function ActiveCallWorkspace() {
       {/* Main Split: Live Transcript & AI Assist Panel */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 text-xs">
         {/* Live Transcript Box */}
-        <div className="rounded-xl border border-gray-200 bg-gray-50/60 p-4 space-y-2 flex flex-col justify-between h-64">
-          <div className="flex items-center justify-between border-b pb-2">
-            <span className="font-bold text-gray-800 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
-              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" /> Live Speech Transcript
+        <div className="rounded-2xl border border-gray-200 bg-gray-50/80 p-4 space-y-3 flex flex-col justify-between h-[380px] shadow-inner">
+          <div className="flex items-center justify-between border-b pb-2.5">
+            <span className="font-extrabold text-gray-900 uppercase tracking-wider text-xs flex items-center gap-2">
+              <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" /> Live Speech Transcript (Real-Time)
             </span>
-            <span className="text-[10px] text-gray-500">Sentiment: Positive</span>
+            <span className="text-xs font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">
+              Sentiment: Highly Positive
+            </span>
           </div>
 
-          <div className="space-y-2 overflow-y-auto flex-1 pr-1 font-medium leading-relaxed text-gray-800">
-            {transcriptLines.map((line, idx) => (
-              <p key={idx} className={line.includes("Arvind") ? "text-emerald-900 font-bold" : "text-gray-700"}>
-                {line}
-              </p>
-            ))}
+          <div className="space-y-3 overflow-y-auto flex-1 pr-2 font-medium leading-relaxed text-gray-800">
+            {transcriptLines.map((line, idx) => {
+              const isCaller = line.includes("Arvind");
+              const timeMatch = line.match(/^\[(.*?)\]/);
+              const timestamp = timeMatch ? timeMatch[1] : "";
+              const contentWithoutTime = line.replace(/^\[.*?\]\s*/, "");
+
+              return (
+                <div
+                  key={idx}
+                  className={`p-3 rounded-xl border text-xs sm:text-sm shadow-2xs space-y-1 transition-all ${
+                    isCaller
+                      ? "bg-emerald-50/90 border-emerald-200 text-emerald-950 font-medium ml-2"
+                      : "bg-white border-gray-200 text-gray-900 mr-2"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className={`font-bold text-xs ${isCaller ? "text-emerald-900" : "text-purple-900"}`}>
+                      {isCaller ? "Tele-caller Arvind" : lead.name}
+                    </span>
+                    {timestamp && (
+                      <span className="text-[10px] font-mono font-bold text-gray-400 bg-gray-100 px-1.5 py-0.5 rounded">
+                        {timestamp}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-gray-800 text-xs sm:text-sm leading-relaxed">
+                    {contentWithoutTime.replace(/^(Tele-caller Arvind|.*?):\s*/, "")}
+                  </p>
+                </div>
+              );
+            })}
           </div>
         </div>
 
         {/* AI Assist Panel */}
-        <div className="rounded-xl border border-purple-200 bg-purple-50/50 p-4 space-y-3 flex flex-col justify-between">
-          <div className="space-y-2">
-            <div className="flex items-center justify-between border-b border-purple-200 pb-2">
-              <span className="font-bold text-[#3b1254] uppercase tracking-wider text-[11px] flex items-center gap-1.5">
-                <Sparkles size={14} className="text-purple-700" /> AI Assist & SOP Checklist
+        <div className="rounded-2xl border border-purple-200 bg-purple-50/60 p-4 space-y-3 flex flex-col justify-between h-[380px]">
+          <div className="space-y-3">
+            <div className="flex items-center justify-between border-b border-purple-200 pb-2.5">
+              <span className="font-extrabold text-[#3b1254] uppercase tracking-wider text-xs flex items-center gap-1.5">
+                <Sparkles size={16} className="text-purple-700" /> AI Assist & SOP Checklist
               </span>
-              <span className="text-[10px] font-bold text-purple-900 bg-purple-100 px-2 py-0.5 rounded">
+              <span className="text-xs font-bold text-purple-900 bg-purple-100 px-2.5 py-0.5 rounded-full">
                 Value: {formatCurrency(lead.estimatedValue)}
               </span>
             </div>
 
-            <div className="rounded-lg bg-white p-2.5 border border-purple-200 space-y-1">
-              <span className="font-bold text-purple-950 block">Main Objective:</span>
-              <p className="text-purple-900 font-medium">
-                Address EMI terms, state 100-night trial period, and dispatch quotation via WhatsApp.
+            <div className="rounded-xl bg-white p-3 border border-purple-200 space-y-1 shadow-2xs">
+              <span className="font-extrabold text-[#3b1254] block text-xs">Primary Call Objective:</span>
+              <p className="text-purple-950 font-medium text-xs sm:text-sm leading-relaxed">
+                Address EMI terms, state 100-night trial period guarantee, and dispatch store location + quote link via WhatsApp.
               </p>
             </div>
 
-            {aiAnswer && (
-              <div className="rounded-lg bg-emerald-100 p-2.5 border border-emerald-300 text-emerald-950 font-bold animate-in fade-in">
+            {aiAnswer ? (
+              <div className="rounded-xl bg-emerald-100 p-3 border border-emerald-300 text-emerald-950 font-bold text-xs sm:text-sm animate-in fade-in shadow-2xs">
                 {aiAnswer}
+              </div>
+            ) : (
+              <div className="rounded-xl bg-purple-100/50 p-3 border border-purple-200 text-purple-900 text-xs font-medium space-y-1">
+                <span className="font-bold text-purple-950 block">AI Speech Recommendation:</span>
+                <p className="italic">"Explain the 0% interest EMI options starting at ₹450/month and remind customer of 100-night trial."</p>
               </div>
             )}
           </div>
 
           {/* Ask AI Input */}
-          <form onSubmit={handleAskAI} className="flex items-center gap-2 pt-2 border-t border-purple-200">
+          <form onSubmit={handleAskAI} className="flex items-center gap-2 pt-3 border-t border-purple-200">
             <input
               type="text"
-              placeholder="Ask AI about this call..."
+              placeholder="Ask Avani AI about this call..."
               value={aiQuestion}
               onChange={(e) => setAiQuestion(e.target.value)}
-              className="flex-1 rounded-lg border border-purple-300 bg-white px-3 py-1.5 text-xs text-gray-900 focus:outline-none focus:border-[#3b1254]"
+              className="flex-1 rounded-xl border border-purple-300 bg-white px-3.5 py-2 text-xs sm:text-sm text-gray-900 focus:outline-none focus:border-[#3b1254] shadow-2xs"
             />
             <button
               type="submit"
-              className="rounded-lg bg-[#3b1254] px-3 py-1.5 text-xs font-bold text-white hover:bg-purple-900 flex items-center gap-1"
+              className="rounded-xl bg-[#3b1254] px-4 py-2 text-xs font-extrabold text-white hover:bg-purple-900 flex items-center gap-1 shadow-xs"
             >
-              <Send size={12} /> Ask
+              <Send size={14} /> Ask
             </button>
           </form>
         </div>

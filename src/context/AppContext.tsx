@@ -145,8 +145,13 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setIsMuted(false);
     setIsOnHold(false);
     setTranscriptLines([
-      `[00:01] Tele-caller Arvind: Hello ${lead.name}! This is Arvind calling from The Sleep Company Koramangala store...`,
-      `[00:03] ${lead.name}: Hi Arvind! Yes, I was looking into the ${lead.product}.`
+      `[00:01] Tele-caller Arvind: Hello ${lead.name}! This is Arvind calling from The Sleep Company Koramangala flagship store...`,
+      `[00:04] ${lead.name}: Hi Arvind! Yes, I was checking out the ${lead.product} online and visited the store earlier today.`,
+      `[00:10] Tele-caller Arvind: Fantastic! I noticed you were looking at back-support mattresses. Were you specifically looking for firm lumbar support or pressure-relieving comfort?`,
+      `[00:18] ${lead.name}: Mostly looking for back-pain relief and cooling comfort, but I wanted to confirm the 100-night trial period and EMI options before deciding.`,
+      `[00:26] Tele-caller Arvind: Excellent question! We offer a 100-night risk-free home trial with zero-cost EMI starting from ₹450/month, plus free door-step delivery & installation!`,
+      `[00:34] ${lead.name}: That sounds very reasonable. Can you send me the detailed quotation and store direction link on WhatsApp so I can review with my family?`,
+      `[00:41] Tele-caller Arvind: Absolutely! I am dispatching the official quote, EMI breakdown, and digital catalog directly to your WhatsApp right now!`
     ]);
     setPage("plan");
 
