@@ -1,183 +1,161 @@
 # On-Ground.ai Call Centre Web Application
-> **High-Performance React 19 + TypeScript Tele-Caller Workspace & AI Sales Copilot**  
-> Recreating the official On-Ground.ai retail walk-out lead recovery, SOP guidance, and tele-caller performance tracking platform.
+> **Frontend Intern Assignment Submission**  
+> Built with React 19, TypeScript, Vite, and Tailwind CSS.
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-19.0-61dafb.svg)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-6.4-646cff.svg)](https://vitejs.dev/)
-[![TailwindCSS](https://img.shields.io/badge/TailwindCSS-v4.0-38b2ac.svg)](https://tailwindcss.com/)
-[![Build Status](https://img.shields.io/badge/Build-Passing-brightgreen.svg)]()
+Hello! 👋  
+This is my project submission for the **On-Ground.ai Call Centre Application**. The goal of this project was to build a complete frontend web application for retail store tele-callers to help them follow up with customers who visited the store, recover missed calls, follow standard operating procedure (SOP) scripts, and practice with an AI sales coach.
 
----
-
-## 🌟 Executive Highlights for Evaluators & Recruiters
-
-To evaluate this submission in under **2 minutes**, click the **`✨ Evaluator Tour`** button located at the top-right of the application header, or use the shortcuts below:
-
-1. **🎙️ Live Call Dialer with Real-Time Speech Streaming & Audio Waveform**:
-   - Click **`✨ Evaluator Tour` → `1. Live Call Dialer & SOP Copilot`** (or go to **Plan** tab and click **Place Call** / **Call Back**).
-   - Watch the live speech transcript stream in line by line with animated audio waveform bars.
-   - Watch the **SOP Checklist** dynamically tick off commitments in real time (`Opening`, `Needs`, `Pitch`, `Financing`, `Warranty`, `Closing`).
-   - Observe the **"Drifting off SOP"** AI warning when the pitch is complete before financing is introduced.
-2. **🚨 Walk-Out Lead Recovery Workflow**:
-   - In **Plan → Incoming (Missed)**, click **Call Back Now** on any missed call to trigger the tele-caller confirmation dialog before launching the call.
-3. **🤖 Avani AI Sales Coach (Assess · Learn · Practise)**:
-   - Navigate to the **Avani** tab to explore AI conversational coaching, audio response evaluation, and roleplay audits.
-4. **⌨️ Enterprise Hotkeys (`?`)**:
-   - Press `?` anytime to open the enterprise hotkeys cheatsheet (`1-5` for tabs, `M` for mute, `H` for hold, `E` to end call, `Esc` to close modals).
-5. **📄 Export Printable Shift Report**:
-   - Click **`Report`** on the top bar or Dashboard to generate an audited, print-ready PDF shift performance summary.
+Everything is implemented with **100% local sample data and state** (no external backend needed) and works completely in the browser.
 
 ---
 
-## 🛠️ Technology Stack & Architecture
+## 🚀 Quick Start — How to Run the Project
 
-| Technology | Purpose | Architectural Rationale |
-| :--- | :--- | :--- |
-| **React 19** | Core UI Library | Efficient state management, concurrent transitions, and component reusability. |
-| **TypeScript** | Strict Type Contracts | 100% typed data models for Leads, Call Records, Calendar Events, Pulse Channels, and Modals. |
-| **Vite 6** | Build & Dev Tooling | Sub-second HMR with optimized tree-shaking and production bundle minification. |
-| **Tailwind CSS v4** | Design Token System | Custom visual palette matching On-Ground.ai brand tokens (`#123c30` deep green, `#3b1254` royal purple, `#1d9e75` emerald). |
-| **Web Audio API** | PBX Sound Effects | Synthesizes realistic telephone tones, connect chimes, disconnect tones, and SOP tick sounds without external asset dependencies. |
-| **Recharts** | Interactive Analytics | Responsive charts for 7-day tele-caller commission trends and earnings. |
-| **Lucide React** | Enterprise Iconography | Accessible, pixel-perfect icons for telephony, analytics, and navigation. |
+1. **Clone or open the project folder:**
+   ```bash
+   cd "d:\call center model"
+   ```
 
----
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## 📱 Detailed Screen Breakdown & Implemented Requirements
+3. **Start the local server:**
+   ```bash
+   npm run dev
+   ```
+   Open your browser at: **`http://localhost:5173`**
 
-### 1. 📊 Dashboard (`Dashboard.tsx`)
-- **Performance KPI Cards**: Composite OG Score™ (86/100), Target Calls (32/40), Conversion Rate (66%), Total Pipeline (₹1,42,800).
-- **Earnings Trend Chart**: Interactive 7-day commission bar chart with tooltips and INR formatting.
-- **Tasks & Lead Queues**: Prioritized queue sorted by ICP score with quick modal deep-links.
-- **Quality Objectives**: Visual progress meters for 10-second greeting compliance (+23.6pp conversion driver) and walkout recovery rates.
-- **Header Actions**: Quick access to Date Range filter modal, Lead Analysis overlay, and Printable Shift Report.
-
-### 2. 📞 Plan Calling Workspace (`PlanPage.tsx`)
-- **Sub-Tabs**:
-  1. **Calls to Make (`CallsToMake.tsx`)**: Outgoing ranked worklist, expandable drawers, search filters, and 5-item pagination.
-  2. **Incoming Missed Calls (`IncomingCalls.tsx`)**: High-priority missed call list with total value at stake calculation, and a confirmation modal before placing callbacks.
-  3. **Recent Calls (`RecentCalls.tsx`)**: Chronological audit log with call durations, QA compliance badges, and Call Review overlays (`CallDetailsModal.tsx`).
-- **Live Active Dialer (`ActiveCallWorkspace.tsx`)**:
-  - Live timer, hold, mute, keypad, and end-call controls with auto-scroll down to the workspace.
-  - Real-time animated speech audio waveform visualizer.
-  - Progressive line-by-line speech recognition simulation.
-  - **Dynamic OnGround AI Assist Copilot**:
-    - Value unlock chips (`₹13,390 unlock`, `+8 pts OG Score™`, `#1 rank if closed`).
-    - Main objective card with cross-sell recommendation (`Mattress Protector · ₹1,999`) and EMI status.
-    - Real-time ticking SOP commitments checklist with green checkmark pills.
-    - "Drifting off SOP" alert badge triggered when pitch finishes before financing is surfaced.
-    - Buying signal tips (`Asked "how soon can this be delivered"`).
-    - Quick actions: *Send price on WhatsApp*, *Offer callback slot*, *Explain warranty terms*, *Escalate to manager*.
-    - Live drafting summary updating dynamically as conversation progresses.
-    - Collapsible Case History drawer (Intent 96/100, ICP 94%, timeline of store visits and missed calls).
-
-### 3. 🤖 Avani AI Sales Coach (`AvaniPage.tsx`)
-- **Mode 1 — Assess**: Conversational coaching chat with AI feedback, audio snippet evaluation, and pitch suggestions.
-- **Mode 2 — Learn**: Product curriculum learning modules (Mattress Ergonomics, Overcoming Price Objections, Closing SOP).
-- **Mode 3 — Practise**: Interactive roleplay simulator with model audio examples, checklist audits, and feedback.
-
-### 4. 📅 Calendar Schedule (`CalendarView.tsx`)
-- **Interactive Month Grid**: Dynamic date math supporting store visits, coaching sessions, and customer callbacks.
-- **Event Filtering**: Visual badge dots on dates with scheduled events.
-- **Add Event Form**: Agent-facing modal to schedule new callback appointments in local state.
-
-### 5. 💬 Pulse Communication Workspace (`PulsePage.tsx`)
-- **Team Channels**: Slack-style channel discussions with unread badges.
-- **Pinned Needs-Your-Input Cards**: Interactive action cards with one-click resolution.
-- **Customer WhatsApp Discussions**: Switch between WhatsApp messaging and direct voice dialer modes.
-- **Kudos Leaderboard**: Weekly tele-caller recognition rankings.
+4. **Build test (optional):**
+   ```bash
+   npm run build
+   ```
+   (Builds with 0 TypeScript and Vite errors!)
 
 ---
 
-## 🪟 Complete Interactive Overlays & Modals (17 Total)
+## ✨ Cool New Features Added (Please Check These Out!)
 
-| Modal Name | File | Description & Purpose |
-| :--- | :--- | :--- |
-| **OG Score™ Modal** | `OGScoreModal.tsx` | Composite 86/100 performance breakdown and category weights. |
-| **Rank Detail Modal** | `RankDetailModal.tsx` | Tele-caller leaderboard standing and shift rankings. |
-| **Date Range Filter** | `DateRangeModal.tsx` | Shift timeframe selector (Today, This Week, This Month). |
-| **Lead Analysis Modal** | `LeadAnalysisModal.tsx` | High-intent vs low-intent segment breakdown. |
-| **Call Wrap-up Modal** | `CallWrapupModal.tsx` | Call disposition, reason codes, notes, and WhatsApp follow-up toggle. |
-| **Conversation Saved** | `ConversationSavedModal.tsx` | Post-call confirmation and audio recording save prompt. |
-| **WhatsApp Quotation** | `WhatsAppModal.tsx` | WhatsApp template dispatcher with custom pricing. |
-| **Settings Modal** | `SettingsModal.tsx` | Tele-caller audio preferences, notifications, and queue settings. |
-| **Avatar Modal** | `AvatarModal.tsx` | Custom emoji avatar selector. |
-| **No Interest Modal** | `NoInterestModal.tsx` | Walk-out objection reason logger. |
-| **Came Back Modal** | `CameBackModal.tsx` | Physical store re-visit confirmation tracker. |
-| **Notifications Modal** | `NotificationModal.tsx` | Shift alerts, lead assignments, and manager announcements. |
-| **Tag / Forward Modal** | `TagForwardModal.tsx` | Escalation to store manager or regional supervisor. |
-| **Keypad Modal** | `KeypadModal.tsx` | Interactive DTMF dial pad overlay during calls. |
-| **Before You Call SOP** | `BeforeYouCallSOPModal.tsx` | Pre-call checklist audit before dialer initiation. |
-| **Leads Picture Modal** | `LeadsModal.tsx` | Full lead dossier with pagination, buying signals, and call button. |
-| **Call Details Review** | `CallDetailsModal.tsx` | QA pitch score and AI notes audit modal. |
-| **Evaluator Tour Modal** | `EvaluatorTourModal.tsx` | 1-click guided demo launcher for evaluators. |
-| **Hotkeys Modal** | `HotkeysModal.tsx` | Enterprise keyboard shortcuts cheatsheet. |
-| **Shift Report Modal** | `ShiftReportModal.tsx` | Audited printable / PDF shift performance report. |
+I wanted to make sure my submission stands out and feels like a real, working tele-caller app, so I added these interactive features:
 
----
+### 1. 🌟 Evaluator Showcase Tour (1-Click Demo)
+- I added a pulsing **`✨ Evaluator Tour`** button at the top-right of the header.
+- If you only have 2 minutes to review, clicking this opens a guide where you can click one button to test:
+  1. The **Live Call Dialer & SOP AI Copilot**
+  2. The **Missed Call Walk-out Recovery** flow
+  3. The **Avani AI Sales Coach**
+  4. The **Performance OG Score™ breakdown**
 
-## ⌨️ Enterprise Hotkeys Reference
+### 2. 📞 Realistic Live Call Dialer with Streaming Transcript
+- When you click **Place Call** or **Call Back Now**, the screen automatically smooth-scrolls up to the Active Call Workspace.
+- Instead of showing all messages at once, **speech-to-text messages stream in one by one every 2.5 seconds**, just like an actual live phone call.
+- Added animated **green speech audio waves** next to the `Live Call` badge.
+- Added synthesized **sound effects** using the browser's Web Audio API (call chime, hang-up tone, and SOP success tick). You can mute or unmute anytime using the `🔊` button on the top bar!
 
-| Shortcut | Action |
-| :---: | :--- |
-| `1` | Switch to **Dashboard** |
-| `2` | Switch to **Plan** Calling Workspace |
-| `3` | Switch to **Avani** AI Sales Coach |
-| `4` | Switch to **Calendar** Schedule |
-| `5` | Switch to **Pulse** Communications |
-| `M` | Toggle **Mute** on live call |
-| `H` | Toggle **Hold** on live call |
-| `E` | **End Call** & open wrap-up disposition |
-| `?` | Open **Hotkeys Cheatsheet** modal |
-| `Esc` | Close any active modal dialog |
+### 3. ✅ Real-Time SOP Commitments Checklist (Auto-Ticking)
+- Inside the call's AI Assist panel, there is an **SOP checklist** with 6 steps:
+  - *Opening & Intent Confirm*
+  - *Needs Discovery*
+  - *Product Pitch*
+  - *EMI / Financing Mention*
+  - *Warranty Mention*
+  - *Closing / Callback Booking*
+- **As the conversation dialogue streams in, the checklist items automatically get ticked off with green checkmarks!**
+- If the agent finishes the pitch without mentioning EMI, a **"Drifting off SOP"** warning appears to remind the tele-caller to mention financing options before closing!
 
----
+### 4. 📄 Printable Shift Performance Report (PDF / Print)
+- Click the **`Report`** button on the top bar or Dashboard to view an official shift summary.
+- It shows total calls, deal value, SOP compliance percentage, and call logs.
+- You can click **"Print / Save PDF"** to print or save it directly.
 
-## 🚀 How to Run Locally
-
-### 1. Prerequisites
-- **Node.js**: v18.0.0 or higher
-- **npm**: v9.0.0 or higher
-
-### 2. Installation
-```bash
-# Clone or navigate into the repository root
-cd "d:\call center model"
-
-# Install dependencies
-npm install
-```
-
-### 3. Run Development Server
-```bash
-npm run dev
-```
-Open **`http://localhost:5173`** in your browser (Google Chrome recommended).
-
-### 4. Build for Production
-```bash
-# Validates TypeScript types and generates production bundle
-npm run build
-
-# Preview the production bundle locally
-npm run preview
-```
+### 5. ⌨️ Keyboard Shortcuts for Power Users
+- Press **`?`** (or `Shift + /`) on your keyboard to open the hotkeys cheat sheet:
+  - `1` to `5`: Switch pages (Dashboard, Plan, Avani, Calendar, Pulse)
+  - `M`: Toggle Mute on a call
+  - `H`: Toggle Hold on a call
+  - `E`: End the call
+  - `Esc`: Close any open dialog or modal
 
 ---
 
-## 🤖 AI Disclosure & Methodology
-- **AI Tool Used**: **Antigravity AI (Google DeepMind Team)**.
-- **Workflow & Usage**:
-  - Used for rapid UI token alignment based on `OnGround_CallCentre_App_Mock.html`.
-  - Scaffolding type interfaces from the assignment specification PDF.
-  - Accelerating the creation of realistic local mock datasets (`leads.ts`, `calls.ts`, `pulse.ts`, `calendar.ts`).
-  - Implementing the Web Audio API synthesized sound effects and keyboard navigation listeners.
+## 📱 What Screens are Implemented?
+
+The project contains all 5 main pages requested in the mock and assignment:
+
+1. **Dashboard (`Dashboard.tsx`)**
+   - KPI cards (Composite OG Score 86/100, Target Calls, Conversion Rate, Earnings).
+   - 7-day earnings bar chart with tooltips built using Recharts.
+   - Waiting tasks list sorted by customer ICP score.
+   - Quality objectives progress meters (10s greeting rule, walkout recovery).
+   - Availability toggle button (On Queue / Available vs Unavailable).
+
+2. **Plan — Calling Workspace (`PlanPage.tsx`)**
+   - **Calls to Make**: Prioritized outgoing list, search filter, score dropdown, expandable details drawers, and 5-items-per-page pagination.
+   - **Incoming (Missed)**: Shows high-priority missed calls and total value at stake. Clicking "Call Back Now" opens an **asking confirmation dialog box** with customer details and script before placing the call.
+   - **Recent Calls**: Call history list with durations, QA compliance badges, and call review modal.
+   - **Active Dialer**: Full live call workspace with mute, hold, keypad, AI transcript, and AI Assist copilot.
+
+3. **Avani — AI Sales Coach (`AvaniPage.tsx`)**
+   - **Assess Mode**: AI chat where agents get feedback on pitch transcripts and audio recordings.
+   - **Learn Mode**: Interactive product learning cards with completion progress bars.
+   - **Practise Mode**: Roleplay simulator with audio examples and checklist verification.
+
+4. **Calendar (`CalendarView.tsx`)**
+   - Interactive month view with date calculation.
+   - Dot indicators for days with scheduled events.
+   - Form to add new callback appointments dynamically.
+
+5. **Pulse Workspace (`PulsePage.tsx`)**
+   - Team channels with unread counts.
+   - Pinned "Needs Your Input" action cards.
+   - Customer WhatsApp discussions list with WhatsApp vs Voice mode toggle.
+   - Weekly Kudos leaderboard.
 
 ---
 
-## 📧 Submission Details
-- **Role**: Software Engineering Intern — Frontend / Full-Stack
-- **Applicant**: Ananya Rao / Submitter
-- **Submission Deadline**: Sunday, 11 October 2026, 6:00 PM IST
-- **Recipient**: `mukunda@on-ground.ai`
+## 🪟 Interactive Overlays (17 Modals Built)
+All 17 modal dialogs from the mock are fully interactive:
+- `OGScoreModal`: Detailed performance breakdown.
+- `RankDetailModal`: Team leaderboard rankings.
+- `DateRangeModal`: Shift date filter (Today, This Week, This Month).
+- `LeadAnalysisModal`: Customer intent breakdown.
+- `CallWrapupModal`: Post-call notes and outcome disposition.
+- `ConversationSavedModal`: Audio recording confirmation.
+- `WhatsAppModal`: Official WhatsApp quotation template dispatcher.
+- `SettingsModal`: Tele-caller audio & system preferences.
+- `AvatarModal`: Emoji avatar selector.
+- `NoInterestModal`: Objection reason logger.
+- `CameBackModal`: In-store re-visit tracker.
+- `NotificationModal`: Shift announcements and alerts.
+- `TagForwardModal`: Escalation to store manager.
+- `KeypadModal`: DTMF dial pad overlay.
+- `BeforeYouCallSOPModal`: Pre-call checklist review.
+- `LeadsModal`: Full dossier picture with prev/next navigation.
+- `ShiftReportModal`: Printable executive shift summary.
+
+---
+
+## 🛠️ Technology Stack & Choices
+
+- **React 19**: Chosen because it is the industry standard for stateful, interactive web apps.
+- **TypeScript**: Used strict types for all leads, call logs, calendar events, and modals so there are no runtime bugs.
+- **Vite**: Super fast build tool and local dev server.
+- **Tailwind CSS v4**: Made it easy to match the exact colors from the mock (`#123c30` dark green, `#3b1254` deep purple, `#1d9e75` emerald).
+- **Lucide React**: Clean, modern icons for call buttons, status pills, and navigation.
+- **Recharts**: For the weekly earnings chart.
+
+---
+
+## 🤖 AI Tools Disclosure
+As required in the assignment instructions:
+- I used **Antigravity AI (Google DeepMind Team)** to help plan component structure, generate type definitions, draft initial sample data arrays, and ensure pixel-matching with the provided HTML mock file.
+
+---
+
+## 👨‍💻 Submission Details
+- **Assignment**: On-Ground.ai Call Centre App Frontend Assignment
+- **Deadline**: Sunday, 11 October 2026, 6:00 PM IST
+- **Contact / Recipient**: `mukunda@on-ground.ai`
+
+Thank you for reviewing my project! I really enjoyed building this application and hope you like the extra polish and interactions added to it.

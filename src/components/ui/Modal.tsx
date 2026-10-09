@@ -46,10 +46,10 @@ export default function Modal({
       <div
         role="dialog"
         aria-modal="true"
-        className={`w-full ${maxWidth} overflow-hidden rounded-2xl bg-white shadow-2xl transition-all border border-gray-100`}
+        className={`w-full ${maxWidth} max-h-[90vh] flex flex-col overflow-hidden rounded-2xl bg-white shadow-2xl transition-all border border-gray-100`}
       >
         {title && (
-          <header className={`flex items-center justify-between ${headerBg} px-5 py-4 text-white`}>
+          <header className={`flex items-center justify-between ${headerBg} px-5 py-4 text-white shrink-0`}>
             <div>
               <h2 className="text-base font-bold tracking-tight">{title}</h2>
               {subtitle && <p className="text-xs text-white/80 mt-0.5">{subtitle}</p>}
@@ -63,7 +63,7 @@ export default function Modal({
             </button>
           </header>
         )}
-        <div className="p-5">{children}</div>
+        <div className="p-5 overflow-y-auto flex-1">{children}</div>
       </div>
     </div>
   );

@@ -68,7 +68,7 @@ export default function ShiftReportModal() {
         {/* Audit Call Records Table */}
         <div className="space-y-1.5">
           <h4 className="font-extrabold text-gray-900 text-xs uppercase tracking-wider">Shift Call Audit Log</h4>
-          <div className="border border-gray-200 rounded-xl overflow-hidden bg-white max-h-52 overflow-y-auto">
+          <div className="border border-gray-200 rounded-xl overflow-hidden bg-white max-h-40 sm:max-h-48 overflow-y-auto">
             <table className="w-full text-left border-collapse text-[11px]">
               <thead className="bg-gray-100/80 text-gray-600 font-bold border-b border-gray-200 sticky top-0">
                 <tr>
@@ -101,7 +101,7 @@ export default function ShiftReportModal() {
         </div>
 
         {/* Supervisor Signoff Note */}
-        <div className="rounded-xl bg-purple-50 p-3 border border-purple-200 flex items-center justify-between text-[11px]">
+        <div className="rounded-xl bg-purple-50 p-2.5 border border-purple-200 flex items-center justify-between text-[11px]">
           <div>
             <span className="font-extrabold text-purple-950 block">QA Supervisor Verification:</span>
             <p className="text-purple-900">Passed all 14 mandatory contact center compliance checks for this shift.</p>
@@ -109,8 +109,8 @@ export default function ShiftReportModal() {
           <span className="font-mono text-purple-800 text-[10px] font-bold">SIG-OG-2026-9481</span>
         </div>
 
-        {/* Print / Action Controls */}
-        <div className="flex justify-between items-center pt-2 border-t border-gray-100">
+        {/* Print / Action Controls - Sticky at bottom */}
+        <div className="sticky bottom-0 bg-white py-2.5 border-t border-gray-100 flex justify-between items-center -mx-5 px-5 -mb-5 shadow-xs">
           <Button variant="outline" size="sm" onClick={closeModal}>
             Close
           </Button>
