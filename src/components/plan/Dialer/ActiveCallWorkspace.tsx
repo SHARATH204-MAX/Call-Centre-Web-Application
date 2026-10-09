@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useApp } from "../../../context/AppContext";
 import { formatDurationDigital } from "../../../utils/dateUtils";
 import { formatCurrency } from "../../../utils/formatCurrency";
@@ -23,6 +23,17 @@ export default function ActiveCallWorkspace() {
 
   const [aiQuestion, setAiQuestion] = useState("");
   const [aiAnswer, setAiAnswer] = useState<string | null>(null);
+  const transcriptContainerRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll transcript container to bottom as new messages arrive
+  useEffect(() => {
+    if (transcriptContainerRef.current) {
+      transcriptContainerRef.current.scrollTo({
+        top: transcriptContainerRef.current.scrollHeight,
+        behavior: "smooth"
+      });
+    }
+  }, [transcriptLines.length]);
 
   if (callStatus !== "active" && callStatus !== "on-hold") return null;
 
@@ -129,7 +140,7 @@ export default function ActiveCallWorkspace() {
             </span>
           </div>
 
-          <div className="space-y-3 overflow-y-auto flex-1 pr-2 font-medium leading-relaxed text-gray-800">
+          <div ref={transcriptContainerRef} className="space-y-3 overflow-y-auto flex-1 pr-2 font-medium leading-relaxed text-gray-800">
             {transcriptLines.map((line, idx) => {
               const isCaller = line.includes("Arvind");
               const timeMatch = line.match(/^\[(.*?)\]/);
@@ -139,7 +150,7 @@ export default function ActiveCallWorkspace() {
               return (
                 <div
                   key={idx}
-                  className={`p-3 rounded-xl border text-xs sm:text-sm shadow-2xs space-y-1 transition-all ${
+                  className={`p-3 rounded-xl border text-xs sm:text-sm shadow-2xs space-y-1 transition-all animate-in fade-in slide-in-from-bottom-2 duration-300 ${
                     isCaller
                       ? "bg-emerald-50/90 border-emerald-200 text-emerald-950 font-medium ml-2"
                       : "bg-white border-gray-200 text-gray-900 mr-2"

@@ -112,6 +112,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [isOnHold, setIsOnHold] = useState<boolean>(false);
   const [callTimer, setCallTimer] = useState<number>(0);
   const [transcriptLines, setTranscriptLines] = useState<string[]>([]);
+  const [fullScriptLines, setFullScriptLines] = useState<string[]>([]);
 
   // Modal State Manager
   const [activeModal, setActiveModal] = useState<ModalType>(null);
@@ -131,6 +132,24 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     };
   }, [callStatus]);
 
+  // Stream transcript messages one by one during active call
+  useEffect(() => {
+    if (callStatus !== "active" || isOnHold || fullScriptLines.length === 0) return;
+
+    if (transcriptLines.length >= fullScriptLines.length) return;
+
+    const timer = setTimeout(() => {
+      setTranscriptLines((prev) => {
+        if (prev.length < fullScriptLines.length) {
+          return [...prev, fullScriptLines[prev.length]];
+        }
+        return prev;
+      });
+    }, 2500);
+
+    return () => clearTimeout(timer);
+  }, [callStatus, isOnHold, transcriptLines.length, fullScriptLines]);
+
   const toggleQueueStatus = () => {
     setEmployee((prev) => ({
       ...prev,
@@ -144,7 +163,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setCallTimer(0);
     setIsMuted(false);
     setIsOnHold(false);
-    setTranscriptLines([
+    const fullScript = [
       `[00:01] Tele-caller Arvind: Hello ${lead.name}! This is Arvind calling from The Sleep Company Koramangala flagship store...`,
       `[00:04] ${lead.name}: Hi Arvind! Yes, I was checking out the ${lead.product} online and visited the store earlier today.`,
       `[00:10] Tele-caller Arvind: Fantastic! I noticed you were looking at back-support mattresses. Were you specifically looking for firm lumbar support or pressure-relieving comfort?`,
@@ -152,7 +171,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       `[00:26] Tele-caller Arvind: Excellent question! We offer a 100-night risk-free home trial with zero-cost EMI starting from ₹450/month, plus free door-step delivery & installation!`,
       `[00:34] ${lead.name}: That sounds very reasonable. Can you send me the detailed quotation and store direction link on WhatsApp so I can review with my family?`,
       `[00:41] Tele-caller Arvind: Absolutely! I am dispatching the official quote, EMI breakdown, and digital catalog directly to your WhatsApp right now!`
-    ]);
+    ];
+    setFullScriptLines(fullScript);
+    setTranscriptLines([fullScript[0]]); // Start with first line only, rest will stream one by one
     setPage("plan");
 
     // Scroll back to call section smoothly
