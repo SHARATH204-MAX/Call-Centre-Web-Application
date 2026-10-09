@@ -35,11 +35,13 @@ Everything is implemented with **100% local sample data and state** (no external
 
 ---
 
-## 🎥 2-Minute Full Application Demo Video
-  
+## 🎬 Application Demo
 
-### 🎬 Live Demo Video Player
-Below is the recorded walkthrough video (`public/Screen Recording 2026-10-09 234144.mp4`) showing all screens, active call dialer simulation, streaming speech-to-text, and real-time SOP auto-ticking:
+Take a look at the Call Centre Web Application in action!
+
+![Call Centre Web Application Demo](./docs/demo.gif)
+
+> 💡 **Tip:** The preview above shows a quick looping walkthrough of the application. You can also play the full 2-minute walkthrough below or download the video directly from [`public/Screen Recording 2026-10-09 234144.mp4`](./public/Screen%20Recording%202026-10-09%20234144.mp4).
 
 <video src="./public/Screen%20Recording%202026-10-09%20234144.mp4" controls="controls" width="100%" style="border-radius: 12px; max-height: 520px; box-shadow: 0 4px 20px rgba(0,0,0,0.15);">
   <p>Your browser does not support embedded HTML5 video. <a href="./public/Screen%20Recording%202026-10-09%20234144.mp4">Click here to play or download the demo video file</a>.</p>
