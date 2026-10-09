@@ -1,9 +1,21 @@
 @import "tailwindcss";
 
 :root {
+  --brand-green: #0f6e56;
+  --brand-green-light: #e1f5ee;
+  --brand-blue: #185fa5;
+  --brand-red: #e24b4a;
+  --brand-purple: #3b1254;
+  --brand-navy: #1a1a2e;
+  --surface: #ffffff;
+  --page-background: #f7f7f5;
+  --border: #e5e5ea;
+  --text-primary: #1a1a1a;
+  --text-muted: #8e8e93;
+
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  color: #1a1a1a;
-  background-color: #f7f7f5;
+  color: var(--text-primary);
+  background-color: var(--page-background);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -18,6 +30,8 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--page-background);
+  color: var(--text-primary);
 }
 
 button, input, textarea, select {
@@ -29,11 +43,11 @@ button {
 }
 
 button:focus-visible, input:focus-visible, textarea:focus-visible {
-  outline: 2px solid #1d9e75;
+  outline: 2px solid var(--brand-green);
   outline-offset: 2px;
 }
 
-/* Custom Scrollbar for sleek aesthetic */
+/* Custom Scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;

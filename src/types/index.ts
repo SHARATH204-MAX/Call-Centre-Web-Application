@@ -1,23 +1,48 @@
-export type Page = "dashboard" | "calls" | "calendar" | "pulse" | "practise";
+export type Page = "dashboard" | "plan" | "avani" | "calendar" | "pulse";
 
-export type PlanTab = "outgoing" | "incoming" | "recent";
+export type PlanTab = "outgoing" | "incoming" | "recent" | "practise";
+
+export type AvaniMode = "assess" | "learn" | "practise";
+
+export type CallStatusState = "idle" | "incoming" | "ringing" | "active" | "on-hold" | "ended" | "wrapped-up";
+
+export interface EmployeeProfile {
+  name: string;
+  role: string;
+  store: string;
+  allocatedStores: string[];
+  employeeId: string;
+  email: string;
+  phone: string;
+  queueStatus: "available" | "unavailable";
+  avatarPersona: string;
+  avatarEmoji: string;
+  linkedInUrl?: string;
+  ogScore: number;
+  ogChange: number;
+  rank: number;
+  locationGroup: string;
+  staffCount: number;
+}
 
 export interface Lead {
   id: string;
   name: string;
   phone: string;
   product: string;
-  score: number; // ICP score e.g. 87%
-  intentScore: number; // Intent score e.g. 91
-  estimatedValue: number; // e.g. 5400
-  status: string; // e.g. "OPEN", "Follow-up due", "Interested", "New lead"
-  slaTime?: string; // e.g. "2h left"
-  quoteStatus?: string; // e.g. "Quote to be given to customer"
+  score: number;
+  intentScore: number;
+  estimatedValue: number;
+  status: string;
+  slaTime?: string;
+  quoteStatus?: string;
   buyingSignals: string[];
   signalCategories?: {
     category: string;
     description: string;
   }[];
+  noInterestReason?: string;
+  returnTiming?: string;
   nextAction: string;
   lastContacted?: string;
   notes?: string;
@@ -40,14 +65,19 @@ export interface CallRecord {
   sopStep?: string;
   aiNotes?: string;
   qaScore?: number;
+  sopResults?: {
+    checkpoint: string;
+    passed: boolean;
+    evidence: string;
+  }[];
 }
 
 export interface CalendarEvent {
   id: string;
-  date: string; // YYYY-MM-DD
+  date: string;
   time?: string;
   title: string;
-  type: "follow-up" | "callback" | "review" | "meeting";
+  type: "store-visit" | "coaching" | "meeting" | "follow-up" | "callback" | "review";
   leadName?: string;
   leadId?: string;
   status?: "pending" | "completed";
@@ -69,9 +99,60 @@ export interface Channel {
   name: string;
   description: string;
   unreadCount?: number;
-  isDM?: boolean;
-  category?: "agent" | "channel" | "direct";
+  category?: "agent" | "channel" | "direct" | "custom";
   percentage?: number;
+}
+
+export interface CustomerDiscussion {
+  id: string;
+  customerName: string;
+  phone: string;
+  channelType: "whatsapp" | "call";
+  lastMessage: string;
+  timestamp: string;
+  unread: boolean;
+  isHotLead?: boolean;
+  missedCallNotice?: string;
+}
+
+export interface KudosItem {
+  id: string;
+  sender: string;
+  role: string;
+  timestamp: string;
+  message: string;
+  emoji: string;
+  unread: boolean;
+}
+
+export interface AvaniChatSession {
+  id: string;
+  title: string;
+  timestamp: string;
+  messages: {
+    id: string;
+    role: "user" | "assistant";
+    content: string;
+    attachment?: string;
+  }[];
+}
+
+export interface AvaniLearnModule {
+  id: string;
+  title: string;
+  description: string;
+  status: "done" | "in-progress" | "not-started";
+  progressPercent: number;
+  type: "core" | "personalized";
+}
+
+export interface AvaniPractiseStep {
+  id: string;
+  title: string;
+  instructions: string;
+  modelExampleDuration: string;
+  scriptText: string;
+  checks: string[];
 }
 
 export interface DashboardStat {
@@ -112,3 +193,23 @@ export interface PinnedCardInfo {
   resolved?: boolean;
   resolutionText?: string;
 }
+
+export type ModalType =
+  | null
+  | "date-range"
+  | "leads"
+  | "og-score"
+  | "rank-detail"
+  | "linkedin"
+  | "lead-analysis"
+  | "call-wrapup"
+  | "conversation-saved"
+  | "whatsapp-send"
+  | "settings"
+  | "avatar"
+  | "no-interest"
+  | "came-back"
+  | "notifications"
+  | "tag-forward"
+  | "keypad"
+  | "before-you-call";

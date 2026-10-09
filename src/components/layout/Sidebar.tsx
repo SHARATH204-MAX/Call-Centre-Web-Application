@@ -1,23 +1,15 @@
-import { LayoutDashboard, Phone, CalendarDays, MessageSquare, ChevronDown, Sparkles, Mic } from "lucide-react";
+import { LayoutDashboard, Phone, Sparkles, CalendarDays, MessageSquare, ChevronDown, Mic, Bot } from "lucide-react";
+import { useApp } from "../../context/AppContext";
 import type { Page, PlanTab } from "../../types";
 
 interface SidebarProps {
-  page: Page;
-  planTab: PlanTab;
-  onNavigate: (page: Page) => void;
-  onPlanTabChange: (tab: PlanTab) => void;
   isMobileOpen?: boolean;
   onCloseMobile?: () => void;
 }
 
-export default function Sidebar({
-  page,
-  planTab,
-  onNavigate,
-  onPlanTabChange,
-  isMobileOpen = false,
-  onCloseMobile
-}: SidebarProps) {
+export default function Sidebar({ isMobileOpen = false, onCloseMobile }: SidebarProps) {
+  const { page, setPage, planTab, setPlanTab, employee } = useApp();
+
   return (
     <>
       {/* Mobile Backdrop */}
@@ -36,7 +28,7 @@ export default function Sidebar({
         {/* Brand Header */}
         <div className="flex items-center justify-between px-3 pb-6 border-b border-emerald-900/40 mb-3">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 shadow-inner font-black text-xs">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 font-black text-xs">
               OG
             </div>
             <div>
@@ -46,12 +38,12 @@ export default function Sidebar({
           </div>
         </div>
 
-        {/* Navigation Items */}
+        {/* 5 Main Navigation Destinations */}
         <nav className="flex-1 space-y-1.5 overflow-y-auto pr-1">
-          {/* Dashboard */}
+          {/* 1. Dashboard */}
           <button
             onClick={() => {
-              onNavigate("dashboard");
+              setPage("dashboard");
               if (onCloseMobile) onCloseMobile();
             }}
             className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
@@ -64,42 +56,42 @@ export default function Sidebar({
             <span>Dashboard</span>
           </button>
 
-          {/* Plan (Calls) */}
+          {/* 2. Plan */}
           <div>
             <button
               onClick={() => {
-                onNavigate("calls");
+                setPage("plan");
               }}
               className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
-                page === "calls"
+                page === "plan"
                   ? "bg-white/15 text-white shadow-xs font-semibold border-l-2 border-emerald-400"
                   : "text-[#a9c4ba] hover:bg-white/5 hover:text-white"
               }`}
             >
               <div className="flex items-center gap-3">
-                <Phone size={18} className={page === "calls" ? "text-emerald-300" : ""} />
+                <Phone size={18} className={page === "plan" ? "text-emerald-300" : ""} />
                 <span>Plan</span>
               </div>
               <ChevronDown
                 size={15}
-                className={`transition-transform duration-200 ${page === "calls" ? "rotate-180 text-white" : "text-[#a9c4ba]"}`}
+                className={`transition-transform duration-200 ${page === "plan" ? "rotate-180 text-white" : "text-[#a9c4ba]"}`}
               />
             </button>
 
             {/* Sub-tabs under Plan */}
-            {page === "calls" && (
+            {page === "plan" && (
               <div className="ml-5 mt-1.5 space-y-1 border-l border-emerald-800/40 pl-2">
                 {(
                   [
                     ["outgoing", "Calls to make", "8 leads"],
                     ["incoming", "Incoming", "5 missed"],
-                    ["recent", "Recent", "8 calls"],
+                    ["recent", "Recent", "8 calls"]
                   ] as const
                 ).map(([tab, label, badge]) => (
                   <button
                     key={tab}
                     onClick={() => {
-                      onPlanTabChange(tab);
+                      setPlanTab(tab);
                       if (onCloseMobile) onCloseMobile();
                     }}
                     className={`flex w-full items-center justify-between rounded-lg px-2.5 py-1.5 text-xs transition-all ${
@@ -116,26 +108,31 @@ export default function Sidebar({
             )}
           </div>
 
-          {/* Practise a call (Bonus item from PDF sidebar) */}
+          {/* 3. Avani AI Sales Coach */}
           <button
             onClick={() => {
-              onNavigate("practise");
+              setPage("avani");
               if (onCloseMobile) onCloseMobile();
             }}
-            className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
-              page === "practise"
+            className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
+              page === "avani"
                 ? "bg-white/15 text-white shadow-xs font-semibold border-l-2 border-emerald-400"
                 : "text-[#a9c4ba] hover:bg-white/5 hover:text-white"
             }`}
           >
-            <Mic size={18} className={page === "practise" ? "text-emerald-300" : ""} />
-            <span>Practise a call</span>
+            <div className="flex items-center gap-3">
+              <Bot size={18} className={page === "avani" ? "text-emerald-300" : ""} />
+              <span>Avani</span>
+            </div>
+            <span className="text-[9px] uppercase font-bold text-emerald-300 bg-emerald-500/20 px-1.5 py-0.2 rounded border border-emerald-400/30">
+              AI Coach
+            </span>
           </button>
 
-          {/* Calendar */}
+          {/* 4. Calendar */}
           <button
             onClick={() => {
-              onNavigate("calendar");
+              setPage("calendar");
               if (onCloseMobile) onCloseMobile();
             }}
             className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
@@ -148,10 +145,10 @@ export default function Sidebar({
             <span>Calendar</span>
           </button>
 
-          {/* Pulse */}
+          {/* 5. Pulse */}
           <button
             onClick={() => {
-              onNavigate("pulse");
+              setPage("pulse");
               if (onCloseMobile) onCloseMobile();
             }}
             className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
@@ -170,15 +167,15 @@ export default function Sidebar({
           </button>
         </nav>
 
-        {/* Agent Profile Footer (Arvind Rajan) */}
+        {/* Employee Profile Footer */}
         <div className="mt-auto border-t border-emerald-900/40 pt-4 px-1">
           <div className="flex items-center gap-3 rounded-xl bg-white/5 p-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500/30 text-xs font-bold text-emerald-200 border border-emerald-400/40">
-              AR
+            <div className="flex h-9 w-9 items-center justify-center rounded-full bg-emerald-500/30 text-xs font-bold text-emerald-200 border border-emerald-400/40 text-base">
+              {employee.avatarEmoji}
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold text-white truncate">Arvind Rajan</p>
-              <p className="text-[10px] text-emerald-300/70 truncate">The Sleep Company · Shift Active</p>
+              <p className="text-xs font-semibold text-white truncate">{employee.name}</p>
+              <p className="text-[10px] text-emerald-300/70 truncate">{employee.role}</p>
             </div>
           </div>
         </div>

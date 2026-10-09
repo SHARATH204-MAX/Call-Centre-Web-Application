@@ -1,57 +1,41 @@
 import React, { useState } from "react";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
-import type { Page, PlanTab } from "../../types";
+import { useApp } from "../../context/AppContext";
+import type { Page } from "../../types";
 
-interface AppShellProps {
-  page: Page;
-  planTab: PlanTab;
-  onNavigate: (page: Page) => void;
-  onPlanTabChange: (tab: PlanTab) => void;
-  children: React.ReactNode;
-}
-
-export default function AppShell({
-  page,
-  planTab,
-  onNavigate,
-  onPlanTabChange,
-  children,
-}: AppShellProps) {
+export default function AppShell({ children }: { children: React.ReactNode }) {
+  const { page } = useApp();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const pageTitles: Record<Page, { title: string; subtitle: string }> = {
     dashboard: {
       title: "Dashboard",
-      subtitle: "Shift summary, performance metrics & task queue",
+      subtitle: "Employee performance metrics, queue status & daily tasks",
     },
-    calls: {
-      title: "Plan",
-      subtitle: "Call management, lead scoring & call log review",
+    plan: {
+      title: "Today's calling plan — Planner",
+      subtitle: "Prioritized outgoing leads, missed calls & active calling workspace",
     },
-    practise: {
-      title: "Practise a Call",
-      subtitle: "AI Pitch Coach call simulation & objection handling workspace",
+    avani: {
+      title: "Avani — AI Sales Coach",
+      subtitle: "Sales coaching, product learning path & role-play practice",
     },
     calendar: {
       title: "Calendar",
-      subtitle: "Scheduled customer callbacks, reviews & store syncs",
+      subtitle: "Scheduled store visits, coaching sessions & meeting invites",
     },
     pulse: {
-      title: "Pulse",
-      subtitle: "Team channels, AI Pitch Coach & supervisor updates",
+      title: "Pulse Workspace",
+      subtitle: "Team channels, direct messages & customer WhatsApp discussions",
     },
   };
 
-  const currentHeader = pageTitles[page];
+  const currentHeader = pageTitles[page] || pageTitles.dashboard;
 
   return (
     <div className="min-h-screen bg-[#f7f7f5]">
       <Sidebar
-        page={page}
-        planTab={planTab}
-        onNavigate={onNavigate}
-        onPlanTabChange={onPlanTabChange}
         isMobileOpen={isMobileOpen}
         onCloseMobile={() => setIsMobileOpen(false)}
       />

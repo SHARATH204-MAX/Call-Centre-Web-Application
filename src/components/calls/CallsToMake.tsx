@@ -1,17 +1,16 @@
 import { useState, useMemo } from "react";
-import { leads } from "../../data/leads";
+import { useApp } from "../../context/AppContext";
 import type { Lead } from "../../types";
 import { formatCurrency } from "../../utils/formatCurrency";
 import { usePagination } from "../../hooks/usePagination";
 import Pagination from "../leads/Pagination";
-import LeadsModal from "../leads/LeadsModal";
 import EmptyState from "../ui/EmptyState";
 import Button from "../ui/Button";
-import { ChevronDown, ChevronUp, PhoneCall, Sparkles, AlertCircle, Search, Filter } from "lucide-react";
+import { ChevronDown, ChevronUp, PhoneCall, Search, Filter } from "lucide-react";
 
 export default function CallsToMake() {
+  const { leads, startCallForLead, openModal, setSelectedLeadIndex } = useApp();
   const [expandedLeadId, setExpandedLeadId] = useState<string | null>("L001");
-  const [selectedModalIndex, setSelectedModalIndex] = useState<number | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [minScoreFilter, setMinScoreFilter] = useState<number>(0);
 
@@ -27,7 +26,7 @@ export default function CallsToMake() {
         return matchesSearch && matchesScore;
       })
       .sort((a, b) => b.score - a.score);
-  }, [searchQuery, minScoreFilter]);
+  }, [leads, searchQuery, minScoreFilter]);
 
   const {
     currentPage,
@@ -50,12 +49,11 @@ export default function CallsToMake() {
         <div>
           <h2 className="text-sm font-bold text-gray-900 tracking-tight">Calls to Make (Planned Outgoing)</h2>
           <p className="text-xs text-gray-500">
-            Leads ranked by ICP & Intent score · Higher score = Higher conversion probability
+            Ranked by lead attractiveness score — tap a lead for the full picture
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          {/* Search Input */}
           <div className="relative">
             <Search size={14} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
@@ -67,7 +65,6 @@ export default function CallsToMake() {
             />
           </div>
 
-          {/* Score Filter */}
           <select
             value={minScoreFilter}
             onChange={(e) => setMinScoreFilter(Number(e.target.value))}
@@ -103,9 +100,8 @@ export default function CallsToMake() {
                   className="flex flex-col sm:flex-row sm:items-center justify-between p-4 cursor-pointer hover:bg-gray-50/70 transition-colors gap-3"
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                    {/* Score Badge */}
                     <div className="flex h-10 w-10 shrink-0 flex-col items-center justify-center rounded-xl bg-purple-100 text-[#3b1254] font-extrabold text-sm border border-purple-200">
-                      <span>{lead.score}</span>
+                      <span>{lead.score}%</span>
                       <span className="text-[8px] uppercase tracking-wider -mt-1 opacity-70">ICP</span>
                     </div>
 
@@ -135,10 +131,11 @@ export default function CallsToMake() {
                         size="sm"
                         onClick={(e) => {
                           e.stopPropagation();
-                          setSelectedModalIndex(fullIndex >= 0 ? fullIndex : 0);
+                          startCallForLead(lead);
                         }}
+                        className="bg-[#1d9e75] hover:bg-[#168260] font-bold"
                       >
-                        <PhoneCall size={13} /> Call
+                        <PhoneCall size={13} /> Place Call
                       </Button>
 
                       <button
@@ -159,17 +156,15 @@ export default function CallsToMake() {
                 {isExpanded && (
                   <div className="border-t border-gray-100 bg-gray-50/60 p-4 space-y-3 animate-in fade-in duration-150 text-xs">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Buying Signals */}
                       <div>
                         <span className="font-bold text-gray-800 block mb-1">Key Buying Signals:</span>
-                        <ul className="space-y-1 text-gray-600 pl-4 list-disc">
+                        <ul className="space-y-1 text-gray-600 pl-4 list-disc font-medium">
                           {lead.buyingSignals.map((signal, idx) => (
                             <li key={idx}>{signal}</li>
                           ))}
                         </ul>
                       </div>
 
-                      {/* Next Action & SOP */}
                       <div className="space-y-2">
                         <div>
                           <span className="font-bold text-gray-800 block">Next Action:</span>
@@ -187,10 +182,13 @@ export default function CallsToMake() {
 
                     <div className="flex justify-end pt-1">
                       <button
-                        onClick={() => setSelectedModalIndex(fullIndex >= 0 ? fullIndex : 0)}
+                        onClick={() => {
+                          setSelectedLeadIndex(fullIndex >= 0 ? fullIndex : 0);
+                          openModal("leads");
+                        }}
                         className="text-xs font-bold text-[#1d9e75] hover:underline"
                       >
-                        Open full lead intelligence modal →
+                        Open full lead picture →
                       </button>
                     </div>
                   </div>
@@ -210,15 +208,6 @@ export default function CallsToMake() {
         totalItems={totalItems}
         onPageChange={goToPage}
       />
-
-      {/* Leads Intelligence Modal */}
-      {selectedModalIndex !== null && (
-        <LeadsModal
-          leads={leads}
-          initialIndex={selectedModalIndex}
-          onClose={() => setSelectedModalIndex(null)}
-        />
-      )}
     </div>
   );
 }

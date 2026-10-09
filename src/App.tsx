@@ -1,87 +1,83 @@
-import { useState } from "react";
+import { AppProvider, useApp } from "./context/AppContext";
 import AppShell from "./components/layout/AppShell";
-import type { Page, PlanTab } from "./types";
 import Dashboard from "./pages/Dashboard";
-import CallsToMake from "./components/calls/CallsToMake";
-import IncomingCalls from "./components/calls/IncomingCalls";
-import RecentCalls from "./components/calls/RecentCalls";
+import PlanPage from "./pages/PlanPage";
+import AvaniPage from "./pages/AvaniPage";
 import CalendarView from "./components/calendar/CalendarView";
-import PulseHome from "./components/pulse/PulseHome";
-import PulseChannel from "./components/pulse/PulseChannel";
-import PractiseCall from "./pages/PractiseCall";
+import PulsePage from "./pages/PulsePage";
 
-export default function App() {
-  const [page, setPage] = useState<Page>("dashboard");
-  const [planTab, setPlanTab] = useState<PlanTab>("outgoing");
-  const [activeChannel, setActiveChannel] = useState<string | null>(null);
+// Overlays
+import OGScoreModal from "./components/overlays/OGScoreModal";
+import RankDetailModal from "./components/overlays/RankDetailModal";
+import LinkedInModal from "./components/overlays/LinkedInModal";
+import DateRangeModal from "./components/overlays/DateRangeModal";
+import LeadAnalysisModal from "./components/overlays/LeadAnalysisModal";
+import CallWrapupModal from "./components/overlays/CallWrapupModal";
+import ConversationSavedModal from "./components/overlays/ConversationSavedModal";
+import WhatsAppModal from "./components/overlays/WhatsAppModal";
+import SettingsModal from "./components/overlays/SettingsModal";
+import AvatarModal from "./components/overlays/AvatarModal";
+import NoInterestModal from "./components/overlays/NoInterestModal";
+import CameBackModal from "./components/overlays/CameBackModal";
+import NotificationModal from "./components/overlays/NotificationModal";
+import TagForwardModal from "./components/overlays/TagForwardModal";
+import KeypadModal from "./components/overlays/KeypadModal";
+import BeforeYouCallSOPModal from "./components/overlays/BeforeYouCallSOPModal";
+import LeadsModal from "./components/leads/LeadsModal";
 
-  function handleNavigate(nextPage: Page) {
-    setPage(nextPage);
-    if (nextPage === "pulse") {
-      setActiveChannel(null);
-    }
-  }
+function MainContent() {
+  const { page, activeModal, closeModal, leads, selectedLeadIndex } = useApp();
 
   return (
-    <AppShell
-      page={page}
-      planTab={planTab}
-      onNavigate={handleNavigate}
-      onPlanTabChange={setPlanTab}
-    >
+    <AppShell>
       {/* 1. Dashboard View */}
       {page === "dashboard" && <Dashboard />}
 
-      {/* 2, 3, 4. Plan Views (Calls to Make, Incoming, Recent) */}
-      {page === "calls" && (
-        <div className="space-y-4">
-          {/* Sub-tab Navigation Switcher Bar */}
-          <div className="flex items-center gap-1 border-b border-gray-200 bg-white px-4 py-2 rounded-xl shadow-2xs">
-            <span className="text-xs font-bold text-gray-500 mr-2">Plan Tabs:</span>
-            {(
-              [
-                ["outgoing", "Calls to make"],
-                ["incoming", "Incoming (Missed)"],
-                ["recent", "Recent Calls"],
-              ] as const
-            ).map(([tab, label]) => (
-              <button
-                key={tab}
-                onClick={() => setPlanTab(tab)}
-                className={`rounded-lg px-3.5 py-1.5 text-xs font-bold transition-all ${
-                  planTab === tab
-                    ? "bg-[#123c30] text-white shadow-xs"
-                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+      {/* 2. Plan Calling Workspace View */}
+      {page === "plan" && <PlanPage />}
 
-          {planTab === "outgoing" && <CallsToMake />}
-          {planTab === "incoming" && <IncomingCalls />}
-          {planTab === "recent" && <RecentCalls />}
-        </div>
-      )}
+      {/* 3. Avani AI Sales Coach View */}
+      {page === "avani" && <AvaniPage />}
 
-      {/* Bonus. Practise a Call */}
-      {page === "practise" && <PractiseCall />}
-
-      {/* 5. Calendar View */}
+      {/* 4. Calendar View */}
       {page === "calendar" && <CalendarView />}
 
-      {/* 6 & 7. Pulse Home & Pulse Channel Views */}
-      {page === "pulse" && (
-        activeChannel ? (
-          <PulseChannel
-            channel={activeChannel}
-            onBack={() => setActiveChannel(null)}
-          />
-        ) : (
-          <PulseHome onOpenChannel={setActiveChannel} />
-        )
+      {/* 5. Pulse Communication Workspace View */}
+      {page === "pulse" && <PulsePage />}
+
+      {/* Overlays & Modals Manager */}
+      <OGScoreModal />
+      <RankDetailModal />
+      <LinkedInModal />
+      <DateRangeModal />
+      <LeadAnalysisModal />
+      <CallWrapupModal />
+      <ConversationSavedModal />
+      <WhatsAppModal />
+      <SettingsModal />
+      <AvatarModal />
+      <NoInterestModal />
+      <CameBackModal />
+      <NotificationModal />
+      <TagForwardModal />
+      <KeypadModal />
+      <BeforeYouCallSOPModal />
+
+      {activeModal === "leads" && (
+        <LeadsModal
+          leads={leads}
+          initialIndex={selectedLeadIndex}
+          onClose={closeModal}
+        />
       )}
     </AppShell>
+  );
+}
+
+export default function App() {
+  return (
+    <AppProvider>
+      <MainContent />
+    </AppProvider>
   );
 }
